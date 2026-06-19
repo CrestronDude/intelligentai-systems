@@ -1,26 +1,389 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* ─── AI Intelligent Services — Luxury Design System ─────────────────────── */
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* Brand Colors */
+  --color-charcoal: #0C0C0C;
+  --color-charcoal-800: #141414;
+  --color-charcoal-700: #1C1C1C;
+  --color-charcoal-600: #2A2A2A;
+  --color-charcoal-500: #3C3C3C;
+
+  --color-gold: #C9A96E;
+  --color-gold-light: #DFC08B;
+  --color-gold-muted: #A8854A;
+  --color-gold-dark: #8B6B3D;
+
+  --color-cream: #F5F0E8;
+  --color-cream-dark: #EAE3D6;
+  --color-cream-muted: #D4C9B8;
+
+  --color-warm-gray: #7A7670;
+  --color-warm-gray-light: #A09C96;
+
+  /* Semantic */
+  --color-background: var(--color-charcoal);
+  --color-foreground: var(--color-cream);
+  --color-accent: var(--color-gold);
+  --color-muted: var(--color-warm-gray);
+
+  /* Typography */
+  --font-display: var(--font-cormorant), "Georgia", serif;
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+
+  /* Spacing scale (add-ons) */
+  --spacing-18: 4.5rem;
+  --spacing-22: 5.5rem;
+  --spacing-26: 6.5rem;
+  --spacing-30: 7.5rem;
+
+  /* Transitions */
+  --transition-smooth: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-fast: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ─── Base ────────────────────────────────────────────────────────────────── */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-charcoal);
+  color: var(--color-cream);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+}
+
+::selection {
+  background-color: var(--color-gold);
+  color: var(--color-charcoal);
+}
+
+/* ─── Scrollbar ───────────────────────────────────────────────────────────── */
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-charcoal-800);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-gold-dark);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-gold);
+}
+
+/* ─── Typography Utilities ────────────────────────────────────────────────── */
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+.text-display-xl {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 7vw, 7rem);
+  font-weight: 300;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+
+.text-display-lg {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 5vw, 5rem);
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+}
+
+.text-display-md {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 3.5vw, 3.5rem);
+  font-weight: 300;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+.text-display-sm {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 2.5vw, 2.5rem);
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.text-label {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-family: var(--font-sans);
+}
+
+/* ─── Gold Accent Line ────────────────────────────────────────────────────── */
+
+.gold-line::before {
+  content: "";
+  display: block;
+  width: 2.5rem;
+  height: 1px;
+  background: var(--color-gold);
+  margin-bottom: 1.25rem;
+}
+
+/* ─── Gradient Overlays ───────────────────────────────────────────────────── */
+
+.hero-gradient {
+  background: linear-gradient(
+    to right,
+    rgba(12, 12, 12, 0.85) 0%,
+    rgba(12, 12, 12, 0.6) 50%,
+    rgba(12, 12, 12, 0.2) 100%
+  );
+}
+
+.hero-gradient-bottom {
+  background: linear-gradient(
+    to top,
+    rgba(12, 12, 12, 1) 0%,
+    rgba(12, 12, 12, 0) 40%
+  );
+}
+
+.card-gradient {
+  background: linear-gradient(
+    135deg,
+    rgba(28, 28, 28, 0.95) 0%,
+    rgba(20, 20, 20, 0.98) 100%
+  );
+}
+
+/* ─── Gold Border ─────────────────────────────────────────────────────────── */
+
+.gold-border-left {
+  border-left: 1px solid var(--color-gold);
+  padding-left: 1.25rem;
+}
+
+/* ─── Tilt Card ───────────────────────────────────────────────────────────── */
+
+.tilt-card {
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.tilt-card-inner {
+  transform: translateZ(20px);
+  transform-style: preserve-3d;
+}
+
+/* ─── Animations ──────────────────────────────────────────────────────────── */
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(2rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-2rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes drawLine {
+  from { stroke-dashoffset: 1000; }
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes pulse-gold {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+@keyframes scaleUp {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-fade-up {
+  animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.8s ease both;
+}
+
+.animate-slide-left {
+  animation: slideInLeft 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-scale-up {
+  animation: scaleUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animation-delay-100 { animation-delay: 0.1s; }
+.animation-delay-200 { animation-delay: 0.2s; }
+.animation-delay-300 { animation-delay: 0.3s; }
+.animation-delay-400 { animation-delay: 0.4s; }
+.animation-delay-500 { animation-delay: 0.5s; }
+.animation-delay-600 { animation-delay: 0.6s; }
+.animation-delay-700 { animation-delay: 0.7s; }
+.animation-delay-800 { animation-delay: 0.8s; }
+
+/* ─── Image Treatment ─────────────────────────────────────────────────────── */
+
+.image-luxury {
+  object-fit: cover;
+  object-position: center;
+  will-change: transform;
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.image-luxury:hover {
+  transform: scale(1.03);
+}
+
+/* ─── Section Utilities ───────────────────────────────────────────────────── */
+
+.section-padding {
+  padding-top: clamp(5rem, 10vw, 9rem);
+  padding-bottom: clamp(5rem, 10vw, 9rem);
+}
+
+.section-padding-sm {
+  padding-top: clamp(3rem, 6vw, 5rem);
+  padding-bottom: clamp(3rem, 6vw, 5rem);
+}
+
+.container-luxury {
+  max-width: 1320px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: clamp(1.25rem, 5vw, 5rem);
+  padding-right: clamp(1.25rem, 5vw, 5rem);
+}
+
+/* ─── Glass Effect ────────────────────────────────────────────────────────── */
+
+.glass {
+  background: rgba(12, 12, 12, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(201, 169, 110, 0.1);
+}
+
+.glass-light {
+  background: rgba(245, 240, 232, 0.04);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(245, 240, 232, 0.08);
+}
+
+/* ─── Gold Shimmer Button ─────────────────────────────────────────────────── */
+
+.btn-gold-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-gold-shimmer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 40%,
+    rgba(255, 255, 255, 0.15) 50%,
+    transparent 60%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 3s infinite;
+  pointer-events: none;
+}
+
+/* ─── Divider ─────────────────────────────────────────────────────────────── */
+
+.divider-gold {
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--color-gold-dark) 30%,
+    var(--color-gold) 50%,
+    var(--color-gold-dark) 70%,
+    transparent
+  );
+}
+
+/* ─── Scroll Snap Gallery ─────────────────────────────────────────────────── */
+
+.snap-gallery {
+  scroll-snap-type: x mandatory;
+  overflow-x: scroll;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.snap-gallery::-webkit-scrollbar {
+  display: none;
+}
+
+.snap-slide {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+/* ─── Nav ─────────────────────────────────────────────────────────────────── */
+
+.nav-scrolled {
+  background: rgba(12, 12, 12, 0.95);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(201, 169, 110, 0.12);
+}
+
+/* ─── SVG Path Animation ──────────────────────────────────────────────────── */
+
+.svg-path-animated {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: drawLine 2.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
