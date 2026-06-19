@@ -1,4 +1,5 @@
 import Hero from "@/components/home/Hero";
+import RoomJourney from "@/components/home/RoomJourney";
 import TrustBar from "@/components/home/TrustBar";
 import ServicesOverview from "@/components/home/ServicesOverview";
 import FeaturedProjects from "@/components/home/FeaturedProjects";
@@ -10,6 +11,7 @@ export default function Home() {
   return (
     <>
       <Hero />
+      <RoomJourney />
       <TrustBar />
       <ServicesOverview />
       <FeaturedProjects />
