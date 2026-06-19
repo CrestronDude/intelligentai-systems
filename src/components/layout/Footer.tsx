@@ -47,10 +47,10 @@ export default function Footer() {
             </p>
             <div className="flex items-center gap-3">
               <a
-                href="mailto:info@intelligentai.systems"
+                href="mailto:admin@intelligentai.systems"
                 className="text-label text-cream-muted hover:text-gold transition-colors duration-300"
               >
-                info@intelligentai.systems
+                admin@intelligentai.systems
               </a>
             </div>
           </div>

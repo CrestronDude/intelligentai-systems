@@ -283,10 +283,10 @@ export default function ContactPage() {
                         Email
                       </span>
                       <a
-                        href="mailto:info@intelligentai.systems"
+                        href="mailto:admin@intelligentai.systems"
                         className="text-sm text-cream-muted hover:text-cream transition-colors duration-300"
                       >
-                        info@intelligentai.systems
+                        admin@intelligentai.systems
                       </a>
                     </div>
                     <div>
@@ -302,7 +302,7 @@ export default function ContactPage() {
                         Service Area
                       </span>
                       <span className="text-sm text-cream-muted">
-                        Nationwide (US) · Select International
+                        Greater Toronto Area · Canada-Wide
                       </span>
                     </div>
                   </div>
