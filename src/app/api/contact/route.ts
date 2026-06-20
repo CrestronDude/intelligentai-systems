@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 const BREVO_API = "https://api.brevo.com/v3/smtp/email";
 const FROM_EMAIL = "admin@intelligentai.services";
-const TO_EMAIL = "smarthomeprogrammer@gmail.com";
+const TO_EMAIL = "admin@intelligentai.services";
 const TO_NAME = "AI Intelligent Services";
 
 const budgetLabels: Record<string, string> = {
