@@ -34,6 +34,7 @@ const budgets = [
 
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const {
     register,
@@ -48,9 +49,22 @@ export default function ContactPage() {
   });
 
   const onSubmit = async (data: FormData) => {
-    await new Promise((r) => setTimeout(r, 1200));
-    console.log("Form submitted:", data);
-    setSubmitted(true);
+    setSubmitError(null);
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      const json = await res.json();
+      if (!res.ok) {
+        setSubmitError(json.error ?? "Something went wrong. Please try again.");
+        return;
+      }
+      setSubmitted(true);
+    } catch {
+      setSubmitError("Network error. Please check your connection and try again.");
+    }
   };
 
   if (submitted) {
@@ -234,6 +248,13 @@ export default function ContactPage() {
                     </p>
                   )}
                 </div>
+
+                {/* Error */}
+                {submitError && (
+                  <div className="border border-red-500/30 bg-red-500/10 px-5 py-4 text-sm text-red-400">
+                    {submitError}
+                  </div>
+                )}
 
                 {/* Submit */}
                 <div>
