@@ -6,6 +6,8 @@ import Link from "next/link";
 import { projects } from "@/lib/data/projects";
 import { cn } from "@/lib/utils";
 
+const residentialProjects = projects.filter((p) => p.category === "residential");
+
 export default function FeaturedProjects() {
   const galleryRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -64,14 +66,14 @@ export default function FeaturedProjects() {
         className="snap-gallery flex w-full"
         style={{ scrollPaddingLeft: "clamp(1.25rem, 5vw, 5rem)" }}
       >
-        {projects.map((project, i) => (
+        {residentialProjects.map((project, i) => (
           <div
             key={project.id}
             className="snap-slide flex-shrink-0 relative"
             style={{
               width: "min(92vw, 900px)",
               marginLeft: i === 0 ? "clamp(1.25rem, 5vw, 5rem)" : "1.5rem",
-              marginRight: i === projects.length - 1 ? "clamp(1.25rem, 5vw, 5rem)" : 0,
+              marginRight: i === residentialProjects.length - 1 ? "clamp(1.25rem, 5vw, 5rem)" : 0,
             }}
           >
             <div className="relative overflow-hidden group" style={{ height: "min(72vh, 620px)" }}>
@@ -119,9 +121,9 @@ export default function FeaturedProjects() {
 
               {/* Content */}
               <div className="absolute bottom-0 left-0 right-0 p-8 md:p-12 z-10">
-                {/* Client name */}
+                {/* Location */}
                 <span className="text-label text-gold text-[0.6rem] block mb-2 tracking-widest">
-                  {project.client}
+                  {project.location}
                 </span>
                 <h3 className="font-display text-3xl md:text-5xl text-cream font-light mb-3 leading-tight">
                   {project.title}
@@ -163,7 +165,7 @@ export default function FeaturedProjects() {
       {/* Navigation */}
       <div className="container-luxury mt-8 flex items-center justify-between">
         <div className="flex items-center gap-3">
-          {projects.map((_, i) => (
+          {residentialProjects.map((_, i) => (
             <button
               key={i}
               onClick={() => scrollTo(i)}
@@ -180,7 +182,7 @@ export default function FeaturedProjects() {
         <div className="flex items-center gap-2 text-label text-warm-gray text-[0.6rem]">
           <span>{String(activeIndex + 1).padStart(2, "0")}</span>
           <span className="w-6 h-px bg-charcoal-500" />
-          <span>{String(projects.length).padStart(2, "0")}</span>
+          <span>{String(residentialProjects.length).padStart(2, "0")}</span>
         </div>
       </div>
     </section>

@@ -1,12 +1,13 @@
 import Link from "next/link";
 
 const services = [
-  { label: "Home Automation", href: "/services#home-automation" },
-  { label: "Lighting & Shading", href: "/services#lighting" },
-  { label: "Home Cinema & AV", href: "/services#home-cinema" },
-  { label: "Corporate AV", href: "/services#corporate-av" },
-  { label: "Boardroom Design", href: "/services#boardroom" },
-  { label: "Digital Signage", href: "/services#signage" },
+  { label: "Whole-Home Automation", href: "/services#home-automation" },
+  { label: "Distributed Audio & Video", href: "/services#distributed-av" },
+  { label: "Lighting & Shading", href: "/services#lighting-shading" },
+  { label: "Home Cinema & AV", href: "/services#home-theater" },
+  { label: "Corporate AV Integration", href: "/services#corporate-av" },
+  { label: "Boardroom Design", href: "/services#boardroom-av" },
+  { label: "Cahoni AI — Quoting Platform", href: "/services#ai-tools" },
 ];
 
 const company = [
@@ -19,11 +20,11 @@ const company = [
 const brands = [
   "Crestron",
   "RTI",
+  "AMX",
   "Q-SYS",
   "Lutron",
-  "Denon",
-  "Polk Audio",
-  "eufy",
+  "Shure",
+  "Bose Professional",
   "Sonance",
 ];
 
@@ -42,16 +43,25 @@ export default function Footer() {
               <span className="text-label text-gold tracking-[0.2em]">SERVICES</span>
             </div>
             <p className="text-warm-gray text-sm leading-relaxed mb-6 max-w-xs">
-              Premium smart home automation and corporate AV integration.
-              15+ years of world-class programming expertise.
+              Premium smart home automation and corporate AV integration serving
+              Toronto and across Canada. 15+ years of certified programming expertise.
             </p>
-            <div className="flex items-center gap-3">
+            <div className="flex flex-col gap-3">
               <a
                 href="mailto:admin@intelligentai.systems"
-                className="text-label text-cream-muted hover:text-gold transition-colors duration-300"
+                className="text-label text-cream-muted hover:text-gold transition-colors duration-300 text-sm"
               >
                 admin@intelligentai.systems
               </a>
+              <a
+                href="tel:+16472723150"
+                className="text-label text-cream-muted hover:text-gold transition-colors duration-300 text-sm"
+              >
+                647-272-3150
+              </a>
+              <span className="text-[0.65rem] text-warm-gray">
+                Greater Toronto Area · Canada-Wide
+              </span>
             </div>
           </div>
 
@@ -87,6 +97,15 @@ export default function Footer() {
                 </li>
               ))}
             </ul>
+
+            {/* Cahoni AI callout */}
+            <div className="mt-8 border border-gold/20 p-4">
+              <span className="text-label text-gold text-[0.6rem] block mb-1">Software Platform</span>
+              <span className="text-sm text-cream-muted block mb-1">Cahoni AI</span>
+              <span className="text-[0.7rem] text-warm-gray">
+                Quoting & proposal platform for AV integrators and trades.
+              </span>
+            </div>
           </div>
 
           {/* Partners Column */}
@@ -132,7 +151,7 @@ export default function Footer() {
             </span>
             <span className="text-charcoal-500">·</span>
             <span className="text-xs text-warm-gray">
-              Powered by Crestron, RTI & Q-SYS certified expertise
+              Crestron · Q-SYS · AMX · Bose certified
             </span>
           </div>
         </div>

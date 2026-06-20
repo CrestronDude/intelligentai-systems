@@ -5,17 +5,18 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "15+ years of Crestron, RTI, and Q-SYS programming expertise. Learn about AI Intelligent Services and founder Steven's story.",
+    "Design Engineer at Telus Canada. Crestron, RTI, and Q-SYS certified programmer serving Toronto and across Canada with AI Intelligent Services.",
 };
 
 const milestones = [
-  { year: "2009", event: "First Crestron programming certification obtained" },
-  { year: "2012", event: "Expanded into Q-SYS commercial audio/video integration" },
+  { year: "2009", event: "First Crestron programming certification — residential automation specialist" },
+  { year: "2011", event: "Design Engineer role at Telus Canada, Toronto — enterprise-scale AV & structured cabling" },
+  { year: "2013", event: "Q-SYS commercial audio/video certification — corporate AV integration" },
   { year: "2015", event: "RTI Master Programmer certification achieved" },
   { year: "2018", event: "AI Intelligent Services formally founded" },
-  { year: "2020", event: "Completed 200th full-home Crestron installation" },
-  { year: "2022", event: "Launched Cahoni AI integration platform" },
-  { year: "2024", event: "500+ projects delivered across residential & commercial" },
+  { year: "2020", event: "Corporate AV expansion — Crestron, AMX, and Q-SYS enterprise clients" },
+  { year: "2022", event: "Launched Cahoni AI — quoting platform for AV integrators and trades" },
+  { year: "2024", event: "500+ projects delivered across residential and commercial sectors" },
 ];
 
 const values = [
@@ -37,7 +38,7 @@ const values = [
   {
     title: "Innovation",
     description:
-      "We are active in the industry — attending ISE and CEDIA, testing new platforms, and integrating AI tools before they become mainstream. Our clients benefit from being ahead.",
+      "We are active in the industry — attending ISE and CEDIA, testing new platforms, and building proprietary software tools like Cahoni AI before the market catches up.",
   },
 ];
 
@@ -80,38 +81,36 @@ export default function AboutPage() {
               </h2>
               <div className="space-y-5 text-warm-gray text-base leading-relaxed">
                 <p>
-                  AI Intelligent Services was founded by Steven, a Crestron,
-                  RTI, and Q-SYS certified programmer with over 15 years of
-                  hands-on experience in premium residential and commercial AV
-                  integration.
+                  AI Intelligent Services was founded by a Crestron, RTI, AMX, and Q-SYS
+                  certified programmer with over 15 years of hands-on experience across
+                  residential and commercial AV integration in Canada and beyond.
                 </p>
                 <p>
-                  What began as a deep passion for programming complex automation
-                  systems evolved into a full-service integration firm serving
-                  discerning homeowners, architects, and facility managers who
-                  refuse to compromise on quality.
+                  A background as Design Engineer at Telus Canada in Toronto gave us
+                  the enterprise-grade discipline that defines every project we touch —
+                  from the cabling standards in a Rosedale estate to the Q-SYS DSP
+                  architecture in a Fortune 500 boardroom.
                 </p>
                 <p>
-                  Today, AI Intelligent Services is known for one thing above
-                  all else: delivering systems that work flawlessly, look
-                  invisible, and feel effortless — every time, on every project,
-                  regardless of scale.
+                  Today, AI Intelligent Services delivers Crestron, RTI, Q-SYS, and AMX
+                  integrations for discerning homeowners, architects, and corporate
+                  facility managers who refuse to compromise on quality.
                 </p>
                 <p>
-                  We were among the first integrators to actively integrate AI
-                  tools — including Cahoni AI — into our workflow and client
-                  systems, combining traditional programming excellence with
-                  next-generation intelligence.
+                  We also develop software. Cahoni AI is our proprietary quoting and
+                  proposal platform, built for AV integrators and trades to generate
+                  accurate, professional proposals in minutes — and now available as a
+                  white-label software development service for integrator firms.
                 </p>
               </div>
             </div>
 
-            {/* Photo + Credentials */}
+            {/* Credentials */}
             <div>
               <div className="relative aspect-[4/5] mb-8 overflow-hidden">
                 <Image
                   src="https://images.unsplash.com/photo-1560179707-f14e90ef3623?w=800&q=80&fit=crop"
-                  alt="AI Intelligent Services headquarters"
+                  alt="AI Intelligent Services — Toronto"
                   fill
                   className="object-cover"
                   sizes="(max-width: 1024px) 100vw, 50vw"
@@ -137,13 +136,69 @@ export default function AboutPage() {
                   </div>
                 ))}
               </div>
+
+              {/* Telus credential */}
+              <div className="mt-4 border border-charcoal-500 bg-charcoal-700 p-5 flex items-start gap-4">
+                <div className="w-1 self-stretch bg-gold flex-shrink-0" />
+                <div>
+                  <span className="text-label text-gold text-[0.6rem] block mb-1">Career Background</span>
+                  <span className="text-cream text-sm block">Design Engineer — Telus Canada</span>
+                  <span className="text-warm-gray text-xs">Toronto, Ontario</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Cahoni AI */}
+      <section className="section-padding bg-charcoal-800">
+        <div className="container-luxury">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div className="relative aspect-video overflow-hidden">
+              <Image
+                src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1200&q=85&fit=crop"
+                alt="Cahoni AI quoting platform"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
+              <div className="absolute inset-0 bg-charcoal/30" />
+              <div className="absolute bottom-6 left-6">
+                <span className="glass border border-gold/30 px-5 py-3 text-label text-gold text-[0.65rem]">
+                  Software Development Service
+                </span>
+              </div>
+            </div>
+            <div>
+              <span className="text-label text-gold block mb-4">Built by Integrators</span>
+              <h2 className="text-display-md text-cream mb-6">
+                Cahoni AI
+              </h2>
+              <p className="text-warm-gray text-base leading-relaxed mb-6">
+                Cahoni AI is a proprietary quoting and project management platform
+                developed by AI Intelligent Services for AV integrators, trades, and
+                technology contractors. Stop building quotes in spreadsheets. Generate
+                accurate, professional, custom-branded proposals in minutes.
+              </p>
+              <p className="text-warm-gray text-sm leading-relaxed mb-8">
+                Available as a white-label software development service — we build and
+                deploy a fully branded version of Cahoni AI for your firm, complete
+                with your catalogue, pricing, and proposal templates.
+              </p>
+              <Link
+                href="/contact"
+                className="btn-gold-shimmer inline-flex items-center gap-3 px-8 py-3 bg-gold text-charcoal text-label hover:bg-gold-light transition-colors duration-300"
+              >
+                Enquire About Cahoni AI
+              </Link>
             </div>
           </div>
         </div>
       </section>
 
       {/* Values */}
-      <section className="section-padding bg-charcoal-800">
+      <section className="section-padding bg-charcoal">
         <div className="container-luxury">
           <div className="max-w-xl mb-16">
             <span className="text-label text-gold block mb-4">Our Philosophy</span>
@@ -156,7 +211,7 @@ export default function AboutPage() {
             {values.map((v) => (
               <div
                 key={v.title}
-                className="bg-charcoal-800 p-10 md:p-12 group hover:bg-charcoal-700 transition-colors duration-300"
+                className="bg-charcoal p-10 md:p-12 group hover:bg-charcoal-700 transition-colors duration-300"
               >
                 <div className="w-6 h-px bg-gold mb-6 group-hover:w-10 transition-all duration-300" />
                 <h3 className="font-display text-2xl text-cream font-light mb-4">
@@ -172,7 +227,7 @@ export default function AboutPage() {
       </section>
 
       {/* Timeline */}
-      <section className="section-padding bg-charcoal">
+      <section className="section-padding bg-charcoal-800">
         <div className="container-luxury">
           <div className="max-w-xl mb-16">
             <span className="text-label text-gold block mb-4">Our Journey</span>
@@ -220,8 +275,10 @@ export default function AboutPage() {
                 "Crestron Certified",
                 "RTI Master Programmer",
                 "Q-SYS Design Partner",
+                "AMX Certified",
                 "Lutron Authorized",
                 "CEDIA Member",
+                "Telus Canada Alumnus",
               ].map((cert) => (
                 <span
                   key={cert}
@@ -244,12 +301,20 @@ export default function AboutPage() {
           <p className="text-warm-gray mb-8 text-sm">
             Every engagement begins with a complimentary consultation.
           </p>
-          <Link
-            href="/contact"
-            className="btn-gold-shimmer inline-flex items-center gap-3 px-10 py-4 bg-gold text-charcoal text-label hover:bg-gold-light transition-colors duration-300"
-          >
-            Get in Touch
-          </Link>
+          <div className="flex flex-wrap items-center justify-center gap-6">
+            <Link
+              href="/contact"
+              className="btn-gold-shimmer inline-flex items-center gap-3 px-10 py-4 bg-gold text-charcoal text-label hover:bg-gold-light transition-colors duration-300"
+            >
+              Get in Touch
+            </Link>
+            <a
+              href="tel:+16472723150"
+              className="text-label text-cream-muted hover:text-gold transition-colors duration-300"
+            >
+              647-272-3150
+            </a>
+          </div>
         </div>
       </section>
     </>

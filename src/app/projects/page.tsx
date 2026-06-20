@@ -3,15 +3,22 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { projects } from "@/lib/data/projects";
+import { projects, type ProjectCategory } from "@/lib/data/projects";
+import { cn } from "@/lib/utils";
+
+const filters: { label: string; value: ProjectCategory | "all" }[] = [
+  { label: "All Projects", value: "all" },
+  { label: "Residential", value: "residential" },
+  { label: "Corporate AV", value: "corporate" },
+];
 
 export default function ProjectsPage() {
+  const [filter, setFilter] = useState<ProjectCategory | "all">("all");
   const [selectedProject, setSelectedProject] = useState<string | null>(null);
   const [activeImage, setActiveImage] = useState(0);
 
+  const filtered = filter === "all" ? projects : projects.filter((p) => p.category === filter);
   const selected = projects.find((p) => p.id === selectedProject);
-
-  // All images for the selected project
   const allImages = selected
     ? [selected.heroImage, selected.exteriorImage, ...selected.interiorImages]
     : [];
@@ -32,24 +39,44 @@ export default function ProjectsPage() {
           <div className="absolute inset-0 bg-charcoal/65" />
         </div>
         <div className="relative z-10 container-luxury pb-16 w-full">
-          <span className="text-label text-gold block mb-4">Canadian Case Studies</span>
+          <span className="text-label text-gold block mb-4">Our Work</span>
           <h1 className="text-display-lg text-cream mb-4">
-            Two addresses.
+            Residential estates.
             <br />
-            <em className="text-gold not-italic">Zero compromise.</em>
+            <em className="text-gold not-italic">Corporate spaces.</em>
           </h1>
           <p className="text-base text-warm-gray max-w-xl leading-relaxed">
-            Every project below is a real integration delivered to real clients
-            in Toronto's most prestigious neighbourhoods — Bridle Path and Rosedale.
+            Every integration below was delivered to real clients across Canada —
+            from Rosedale and The Bridal Path to the boardrooms of Nestlé, Kraft Heinz,
+            Osler, and Mead Johnson.
           </p>
         </div>
       </section>
 
-      {/* Projects Grid */}
+      {/* Filter + Grid */}
       <section className="section-padding bg-charcoal">
         <div className="container-luxury">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {projects.map((project) => (
+          {/* Filters */}
+          <div className="flex flex-wrap gap-3 mb-12">
+            {filters.map((f) => (
+              <button
+                key={f.value}
+                onClick={() => setFilter(f.value)}
+                className={cn(
+                  "text-label px-5 py-2.5 border transition-all duration-300 text-[0.65rem]",
+                  filter === f.value
+                    ? "bg-gold text-charcoal border-gold"
+                    : "text-warm-gray border-charcoal-500 hover:border-gold hover:text-cream"
+                )}
+              >
+                {f.label}
+              </button>
+            ))}
+          </div>
+
+          {/* Grid */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+            {filtered.map((project) => (
               <div
                 key={project.id}
                 id={project.id}
@@ -57,7 +84,7 @@ export default function ProjectsPage() {
                 onClick={() => { setSelectedProject(project.id); setActiveImage(0); }}
               >
                 {/* Hero image */}
-                <div className="relative overflow-hidden mb-0" style={{ aspectRatio: "16/10" }}>
+                <div className="relative overflow-hidden mb-1" style={{ aspectRatio: "16/10" }}>
                   <Image
                     src={project.heroImage}
                     alt={project.address}
@@ -70,10 +97,10 @@ export default function ProjectsPage() {
                   {/* Address badge */}
                   <div className="absolute top-5 left-5">
                     <div className="glass px-4 py-2 border border-gold/20">
-                      <span className="text-label text-gold text-[0.55rem] block mb-0.5 tracking-widest">
-                        {project.location}
+                      <span className="text-label text-gold text-[0.55rem] block mb-0.5 tracking-widest uppercase">
+                        {project.category === "corporate" ? project.client : project.location}
                       </span>
-                      <span className="text-xs text-cream font-light">{project.address}</span>
+                      <span className="text-xs text-cream font-light">{project.location}</span>
                     </div>
                   </div>
 
@@ -81,6 +108,13 @@ export default function ProjectsPage() {
                   <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <span className="glass border border-gold/30 px-6 py-3 text-label text-gold text-[0.65rem]">
                       View Full Case Study
+                    </span>
+                  </div>
+
+                  {/* Category pill */}
+                  <div className="absolute top-5 right-5">
+                    <span className="glass border border-charcoal-500 px-3 py-1.5 text-[0.55rem] text-warm-gray text-label">
+                      {project.category === "residential" ? "Residential" : "Corporate AV"}
                     </span>
                   </div>
                 </div>
@@ -91,7 +125,7 @@ export default function ProjectsPage() {
                     <div key={i} className="relative overflow-hidden" style={{ aspectRatio: "4/3" }}>
                       <Image
                         src={img}
-                        alt={`${project.title} interior ${i + 1}`}
+                        alt={`${project.title} view ${i + 1}`}
                         fill
                         className="object-cover object-center transition-transform duration-500 group-hover:scale-105"
                         sizes="(max-width: 1024px) 33vw, 17vw"
@@ -104,9 +138,11 @@ export default function ProjectsPage() {
                 <div>
                   <div className="flex items-start justify-between mb-2">
                     <div>
-                      <span className="text-label text-gold text-[0.6rem] block mb-1 tracking-widest">
-                        {project.client}
-                      </span>
+                      {project.category === "corporate" && project.client && (
+                        <span className="text-label text-gold text-[0.6rem] block mb-1 tracking-widest">
+                          {project.client}
+                        </span>
+                      )}
                       <h3 className="font-display text-2xl text-cream font-light">{project.title}</h3>
                     </div>
                     <span className="text-xs text-warm-gray mt-1">{project.year}</span>
@@ -171,16 +207,17 @@ export default function ProjectsPage() {
                   />
                 </div>
               ))}
-              {/* Gradient */}
               <div className="absolute inset-0 bg-gradient-to-t from-charcoal-800 via-transparent to-transparent" />
 
-              {/* Address overlay */}
+              {/* Badge */}
               <div className="absolute top-6 left-6">
                 <div className="glass px-4 py-2 border border-gold/20">
                   <span className="text-label text-gold text-[0.55rem] block mb-0.5 tracking-widest">
-                    {selected.client} · {selected.location}
+                    {selected.category === "corporate" && selected.client
+                      ? selected.client
+                      : selected.location}
                   </span>
-                  <span className="text-xs text-cream font-light">{selected.address}</span>
+                  <span className="text-xs text-cream font-light">{selected.location}</span>
                 </div>
               </div>
 
@@ -213,7 +250,6 @@ export default function ProjectsPage() {
             {/* Content */}
             <div className="p-8 md:p-10">
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
-                {/* Main */}
                 <div className="lg:col-span-2">
                   <p className="text-base text-cream-muted leading-relaxed mb-8">
                     {selected.description}
@@ -239,7 +275,6 @@ export default function ProjectsPage() {
                   </div>
                 </div>
 
-                {/* Stats + Systems */}
                 <div>
                   <div className="grid grid-cols-2 gap-px bg-charcoal-500 mb-8">
                     {selected.stats.map((stat) => (

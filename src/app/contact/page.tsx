@@ -291,6 +291,17 @@ export default function ContactPage() {
                     </div>
                     <div>
                       <span className="text-label text-gold text-[0.6rem] block mb-1">
+                        Phone
+                      </span>
+                      <a
+                        href="tel:+16472723150"
+                        className="text-sm text-cream-muted hover:text-cream transition-colors duration-300"
+                      >
+                        647-272-3150
+                      </a>
+                    </div>
+                    <div>
+                      <span className="text-label text-gold text-[0.6rem] block mb-1">
                         Response Time
                       </span>
                       <span className="text-sm text-cream-muted">

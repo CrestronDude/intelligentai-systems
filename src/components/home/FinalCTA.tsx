@@ -74,6 +74,18 @@ export default function FinalCTA() {
             <div className="w-px h-8 bg-charcoal-500" />
             <div>
               <span className="text-label text-warm-gray text-[0.6rem] block mb-1">
+                Phone
+              </span>
+              <a
+                href="tel:+16472723150"
+                className="text-sm text-cream hover:text-gold transition-colors duration-300"
+              >
+                647-272-3150
+              </a>
+            </div>
+            <div className="w-px h-8 bg-charcoal-500" />
+            <div>
+              <span className="text-label text-warm-gray text-[0.6rem] block mb-1">
                 Response Time
               </span>
               <span className="text-sm text-cream">
