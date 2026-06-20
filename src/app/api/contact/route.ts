@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 
 const BREVO_API = "https://api.brevo.com/v3/smtp/email";
-const TO_EMAIL = "admin@intelligentai.systems";
+const FROM_EMAIL = "admin@intelligentai.services";
+const TO_EMAIL = "smarthomeprogrammer@gmail.com";
 const TO_NAME = "AI Intelligent Services";
 
 const budgetLabels: Record<string, string> = {
@@ -128,7 +129,7 @@ ${message}
 Reply to this email to contact ${name} at ${email}`;
 
   const payload = {
-    sender: { name: TO_NAME, email: TO_EMAIL },
+    sender: { name: TO_NAME, email: FROM_EMAIL },
     to: [{ email: TO_EMAIL, name: TO_NAME }],
     replyTo: { email, name },
     subject: `New ${projectTypeLabels[projectType] ?? projectType} Inquiry — ${name}`,
