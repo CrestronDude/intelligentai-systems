@@ -1,8 +1,9 @@
 "use client";
 
 import { useRef, useEffect } from "react";
+import CahoniLink from "@/components/ui/CahoniLink";
 
-const differentiators = [
+const differentiators: { number: string; title: string; description: React.ReactNode }[] = [
   {
     number: "01",
     title: "Certified at the Highest Level",
@@ -18,8 +19,13 @@ const differentiators = [
   {
     number: "03",
     title: "AI-First Integration Approach",
-    description:
-      "We don't just install hardware. We integrate AI tools like Cahoni AI to create systems that learn, adapt, and optimize. Your home doesn't just respond — it anticipates.",
+    description: (
+      <>
+        We don&apos;t just install hardware. We integrate AI tools like{" "}
+        <CahoniLink /> to create systems that learn, adapt, and optimize.
+        Your home doesn&apos;t just respond — it anticipates.
+      </>
+    ),
   },
   {
     number: "04",

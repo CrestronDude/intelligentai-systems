@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { homeAutomationServices, corporateAVServices, aiServices } from "@/lib/data/services";
+import CahoniLink from "@/components/ui/CahoniLink";
 
 export const metadata: Metadata = {
   title: "Services",
@@ -136,11 +137,23 @@ export default function ServicesPage() {
                 AI-Enhanced Integration
               </span>
               <h2 className="text-display-md text-cream mb-6">
-                {aiServices.title}
+                <CahoniLink>Cahoni AI</CahoniLink>
               </h2>
-              <p className="text-warm-gray text-base leading-relaxed mb-8">
-                {aiServices.description}
+              <p className="text-warm-gray text-base leading-relaxed mb-4">
+                <CahoniLink /> is a proprietary quoting and project management platform
+                built by AI Intelligent Services — available as a software development
+                service for AV integrators, trades, and technology contractors. Stop
+                building quotes in spreadsheets. Generate accurate, professional, branded
+                proposals in minutes. Designed by integrators, for integrators.
               </p>
+              <a
+                href="https://intelligentai.services/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-[#7FBBCF] hover:text-[#A8D4E2] transition-colors duration-200 text-label text-[0.65rem] mb-8 hover:underline underline-offset-2"
+              >
+                Visit intelligentai.services ↗
+              </a>
               <ul className="flex flex-col gap-4">
                 {aiServices.features.map((f) => (
                   <li key={f} className="flex items-start gap-3">

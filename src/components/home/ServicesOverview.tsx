@@ -3,8 +3,16 @@
 import { useEffect, useRef } from "react";
 import Link from "next/link";
 import TiltCard from "@/components/ui/TiltCard";
+import CahoniLink from "@/components/ui/CahoniLink";
 
-const cards = [
+const cards: {
+  number: string;
+  title: string;
+  subtitle: React.ReactNode;
+  description: string;
+  href: string;
+  image: string;
+}[] = [
   {
     number: "01",
     title: "Smart Home Automation",
@@ -35,7 +43,7 @@ const cards = [
   {
     number: "04",
     title: "AI-Enhanced Control",
-    subtitle: "Cahoni AI · Predictive Automation",
+    subtitle: <><CahoniLink>Cahoni AI</CahoniLink> · Predictive Automation</>,
     description:
       "We integrate next-generation AI tools that learn your preferences, optimize energy use, and make your systems truly intelligent.",
     href: "/services#ai-tools",

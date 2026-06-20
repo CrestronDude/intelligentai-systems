@@ -1,14 +1,29 @@
 "use client";
 
 import Link from "next/link";
+import CahoniLink from "@/components/ui/CahoniLink";
 
-const tools = [
+const tools: {
+  name: React.ReactNode;
+  tagline: string;
+  description: React.ReactNode;
+  status: string;
+  href?: string;
+  externalHref?: string;
+}[] = [
   {
-    name: "Cahoni AI",
-    tagline: "Natural language home control",
-    description:
-      "Converse with your home. Cahoni AI integrates with your Crestron or RTI system to understand natural speech, learn your preferences, and execute complex automation sequences through conversation.",
-    status: "Integrated",
+    name: <CahoniLink>Cahoni AI</CahoniLink>,
+    tagline: "Quoting platform for AV integrators & trades",
+    description: (
+      <>
+        <CahoniLink>Cahoni AI</CahoniLink> is a proprietary quoting and proposal
+        platform built by AI Intelligent Services for AV integrators and trades.
+        Generate accurate, custom-branded proposals in minutes — not hours. Available
+        as a white-label software development service for your firm.
+      </>
+    ),
+    status: "Live Platform",
+    externalHref: "https://intelligentai.services/",
   },
   {
     name: "AI Quote Generator",
@@ -63,7 +78,7 @@ export default function AIToolsSection() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
           {tools.map((tool, i) => (
             <div
-              key={tool.name}
+              key={i}
               className="glass-light border border-charcoal-500 hover:border-gold/30 p-8 md:p-10 transition-all duration-500 group"
             >
               {/* Status Pill */}
@@ -98,26 +113,30 @@ export default function AIToolsSection() {
                 {tool.description}
               </p>
 
+              {tool.externalHref && (
+                <a
+                  href={tool.externalHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-label text-[#7FBBCF] hover:text-[#A8D4E2] transition-colors duration-200 text-[0.65rem] group/link"
+                >
+                  Visit Cahoni AI
+                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
+                    className="transition-transform duration-300 group-hover/link:translate-x-1">
+                    <path d="M2 6H10M7 3l3 3-3 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </a>
+              )}
+
               {tool.href && (
                 <Link
                   href={tool.href}
                   className="inline-flex items-center gap-2 text-label text-cream-muted hover:text-gold transition-colors duration-300 text-[0.65rem] group/link"
                 >
                   Get a Quote
-                  <svg
-                    width="12"
-                    height="12"
-                    viewBox="0 0 12 12"
-                    fill="none"
-                    className="transition-transform duration-300 group-hover/link:translate-x-1"
-                  >
-                    <path
-                      d="M2 6H10M7 3l3 3-3 3"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
+                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
+                    className="transition-transform duration-300 group-hover/link:translate-x-1">
+                    <path d="M2 6H10M7 3l3 3-3 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 </Link>
               )}

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import CahoniLink from "@/components/ui/CahoniLink";
 
 export const metadata: Metadata = {
   title: "About",
@@ -8,18 +9,25 @@ export const metadata: Metadata = {
     "Design Engineer at Telus Canada. Crestron, RTI, and Q-SYS certified programmer serving Toronto and across Canada with AI Intelligent Services.",
 };
 
-const milestones = [
+const milestones: { year: string; event: React.ReactNode }[] = [
   { year: "2009", event: "First Crestron programming certification — residential automation specialist" },
   { year: "2011", event: "Design Engineer role at Telus Canada, Toronto — enterprise-scale AV & structured cabling" },
   { year: "2013", event: "Q-SYS commercial audio/video certification — corporate AV integration" },
   { year: "2015", event: "RTI Master Programmer certification achieved" },
   { year: "2018", event: "AI Intelligent Services formally founded" },
   { year: "2020", event: "Corporate AV expansion — Crestron, AMX, and Q-SYS enterprise clients" },
-  { year: "2022", event: "Launched Cahoni AI — quoting platform for AV integrators and trades" },
+  {
+    year: "2022",
+    event: (
+      <>
+        Launched <CahoniLink /> — quoting platform for AV integrators and trades
+      </>
+    ),
+  },
   { year: "2024", event: "500+ projects delivered across residential and commercial sectors" },
 ];
 
-const values = [
+const values: { title: string; description: React.ReactNode }[] = [
   {
     title: "Precision",
     description:
@@ -37,8 +45,12 @@ const values = [
   },
   {
     title: "Innovation",
-    description:
-      "We are active in the industry — attending ISE and CEDIA, testing new platforms, and building proprietary software tools like Cahoni AI before the market catches up.",
+    description: (
+      <>
+        We are active in the industry — attending ISE and CEDIA, testing new platforms,
+        and building proprietary software tools like <CahoniLink /> before the market catches up.
+      </>
+    ),
   },
 ];
 
@@ -97,7 +109,7 @@ export default function AboutPage() {
                   facility managers who refuse to compromise on quality.
                 </p>
                 <p>
-                  We also develop software. Cahoni AI is our proprietary quoting and
+                  We also develop software. <CahoniLink /> is our proprietary quoting and
                   proposal platform, built for AV integrators and trades to generate
                   accurate, professional proposals in minutes — and now available as a
                   white-label software development service for integrator firms.
@@ -173,25 +185,35 @@ export default function AboutPage() {
             <div>
               <span className="text-label text-gold block mb-4">Built by Integrators</span>
               <h2 className="text-display-md text-cream mb-6">
-                Cahoni AI
+                <CahoniLink>Cahoni AI</CahoniLink>
               </h2>
               <p className="text-warm-gray text-base leading-relaxed mb-6">
-                Cahoni AI is a proprietary quoting and project management platform
+                <CahoniLink /> is a proprietary quoting and project management platform
                 developed by AI Intelligent Services for AV integrators, trades, and
                 technology contractors. Stop building quotes in spreadsheets. Generate
                 accurate, professional, custom-branded proposals in minutes.
               </p>
               <p className="text-warm-gray text-sm leading-relaxed mb-8">
                 Available as a white-label software development service — we build and
-                deploy a fully branded version of Cahoni AI for your firm, complete
+                deploy a fully branded version of <CahoniLink /> for your firm, complete
                 with your catalogue, pricing, and proposal templates.
               </p>
-              <Link
-                href="/contact"
-                className="btn-gold-shimmer inline-flex items-center gap-3 px-8 py-3 bg-gold text-charcoal text-label hover:bg-gold-light transition-colors duration-300"
-              >
-                Enquire About Cahoni AI
-              </Link>
+              <div className="flex flex-wrap items-center gap-5">
+                <a
+                  href="https://intelligentai.services/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-gold-shimmer inline-flex items-center gap-3 px-8 py-3 bg-gold text-charcoal text-label hover:bg-gold-light transition-colors duration-300"
+                >
+                  Visit Cahoni AI ↗
+                </a>
+                <Link
+                  href="/contact"
+                  className="text-label text-cream-muted hover:text-gold transition-colors duration-300 text-sm"
+                >
+                  Enquire About White-Label
+                </Link>
+              </div>
             </div>
           </div>
         </div>
@@ -238,8 +260,8 @@ export default function AboutPage() {
           <div className="relative">
             <div className="absolute left-[5.5rem] top-0 bottom-0 w-px bg-charcoal-500" />
             <div className="flex flex-col gap-10">
-              {milestones.map((m) => (
-                <div key={m.year} className="flex items-start gap-8">
+              {milestones.map((m, i) => (
+                <div key={i} className="flex items-start gap-8">
                   <div className="w-20 flex-shrink-0 text-right">
                     <span className="font-display text-lg text-gold font-light">
                       {m.year}

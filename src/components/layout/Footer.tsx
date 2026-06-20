@@ -7,7 +7,7 @@ const services = [
   { label: "Home Cinema & AV", href: "/services#home-theater" },
   { label: "Corporate AV Integration", href: "/services#corporate-av" },
   { label: "Boardroom Design", href: "/services#boardroom-av" },
-  { label: "Cahoni AI — Quoting Platform", href: "/services#ai-tools" },
+  { label: "Cahoni AI — Quoting Platform", href: "https://intelligentai.services/", external: true },
 ];
 
 const company = [
@@ -71,12 +71,23 @@ export default function Footer() {
             <ul className="flex flex-col gap-3">
               {services.map((s) => (
                 <li key={s.href}>
-                  <Link
-                    href={s.href}
-                    className="text-sm text-warm-gray hover:text-cream transition-colors duration-300"
-                  >
-                    {s.label}
-                  </Link>
+                  {s.external ? (
+                    <a
+                      href={s.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-sm text-[#7FBBCF] hover:text-[#A8D4E2] transition-colors duration-200 hover:underline underline-offset-2"
+                    >
+                      {s.label}
+                    </a>
+                  ) : (
+                    <Link
+                      href={s.href}
+                      className="text-sm text-warm-gray hover:text-cream transition-colors duration-300"
+                    >
+                      {s.label}
+                    </Link>
+                  )}
                 </li>
               ))}
             </ul>
@@ -99,13 +110,20 @@ export default function Footer() {
             </ul>
 
             {/* Cahoni AI callout */}
-            <div className="mt-8 border border-gold/20 p-4">
+            <a
+              href="https://intelligentai.services/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-8 border border-gold/20 hover:border-[#7FBBCF]/40 p-4 block transition-colors duration-300 group"
+            >
               <span className="text-label text-gold text-[0.6rem] block mb-1">Software Platform</span>
-              <span className="text-sm text-cream-muted block mb-1">Cahoni AI</span>
+              <span className="text-sm text-[#7FBBCF] group-hover:text-[#A8D4E2] transition-colors duration-200 block mb-1">
+                Cahoni AI ↗
+              </span>
               <span className="text-[0.7rem] text-warm-gray">
                 Quoting & proposal platform for AV integrators and trades.
               </span>
-            </div>
+            </a>
           </div>
 
           {/* Partners Column */}
