@@ -35,6 +35,9 @@ const budgets = [
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
+  // True when the submission was blocked by bot protection (403/429) — we show
+  // a graceful fallback with direct contact options instead of a raw error.
+  const [blocked, setBlocked] = useState(false);
 
   // Bot defenses (no external dependencies):
   // 1. Honeypot — a hidden field real users never see; bots auto-fill it.
@@ -60,6 +63,7 @@ export default function ContactPage() {
 
   const onSubmit = async (data: FormData) => {
     setSubmitError(null);
+    setBlocked(false);
     try {
       const res = await fetch("/api/contact", {
         method: "POST",
@@ -74,6 +78,12 @@ export default function ContactPage() {
       });
       const json = await res.json();
       if (!res.ok) {
+        // 403 = blocked by bot protection (BotID); 429 = rate limited.
+        // Legitimate visitors caught by these get a graceful path to reach us.
+        if (res.status === 403 || res.status === 429) {
+          setBlocked(true);
+          return;
+        }
         setSubmitError(json.error ?? "Something went wrong. Please try again.");
         return;
       }
@@ -280,6 +290,34 @@ export default function ContactPage() {
                 {submitError && (
                   <div className="border border-red-500/30 bg-red-500/10 px-5 py-4 text-sm text-red-400">
                     {submitError}
+                  </div>
+                )}
+
+                {/* Graceful fallback when blocked by bot protection (403/429) */}
+                {blocked && (
+                  <div className="border border-gold/30 bg-gold/5 px-5 py-5 text-sm">
+                    <p className="text-cream mb-3 leading-relaxed">
+                      We couldn&apos;t verify this submission automatically. This
+                      occasionally happens with strict privacy or ad-blocking
+                      settings — apologies for the inconvenience.
+                    </p>
+                    <p className="text-cream-muted mb-4 leading-relaxed">
+                      Please reach us directly and we&apos;ll respond right away:
+                    </p>
+                    <div className="flex flex-col gap-2">
+                      <a
+                        href="mailto:admin@intelligentai.systems?subject=Project%20Inquiry"
+                        className="text-gold hover:text-gold-light transition-colors duration-300"
+                      >
+                        admin@intelligentai.systems
+                      </a>
+                      <a
+                        href="tel:+16472723150"
+                        className="text-gold hover:text-gold-light transition-colors duration-300"
+                      >
+                        647-272-3150
+                      </a>
+                    </div>
                   </div>
                 )}
 
