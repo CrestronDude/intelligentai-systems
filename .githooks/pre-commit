@@ -1,0 +1,37 @@
+#!/bin/sh
+# Pre-commit secret guard for intelligentai.systems
+# Blocks accidental commits of env files and known secret patterns.
+# Enabled via: git config core.hooksPath .githooks
+
+staged=$(git diff --cached --name-only --diff-filter=ACM)
+status=0
+
+# 1. Block env files (belt-and-suspenders alongside .gitignore)
+for f in $staged; do
+  case "$f" in
+    .env|.env.*|*/.env|*/.env.*)
+      echo "BLOCKED: attempting to commit env file: $f"
+      status=1
+      ;;
+  esac
+done
+
+# 2. Block known secret value patterns in staged content
+#    - Brevo keys (xkeysib-), generic API keys, private keys, AWS keys
+pattern='xkeysib-[A-Za-z0-9]|-----BEGIN [A-Z ]*PRIVATE KEY-----|AKIA[0-9A-Z]{16}|(api[_-]?key|secret|token|password)["'"'"' ]*[:=]["'"'"' ]*[A-Za-z0-9_\-]{20,}'
+for f in $staged; do
+  if git show ":$f" 2>/dev/null | grep -EnI "$pattern" >/dev/null 2>&1; then
+    echo "BLOCKED: possible secret detected in: $f"
+    git show ":$f" 2>/dev/null | grep -EnI "$pattern" | head -3
+    status=1
+  fi
+done
+
+if [ "$status" -ne 0 ]; then
+  echo ""
+  echo "Commit aborted by secret guard. If this is a false positive, run:"
+  echo "  git commit --no-verify"
+  exit 1
+fi
+
+exit 0

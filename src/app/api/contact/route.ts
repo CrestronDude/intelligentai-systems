@@ -1,9 +1,53 @@
 import { NextRequest, NextResponse } from "next/server";
+import { checkBotId } from "botid/server";
+import { z } from "zod";
 
 const BREVO_API = "https://api.brevo.com/v3/smtp/email";
 const FROM_EMAIL = "admin@intelligentai.services";
 const TO_EMAIL = "admin@intelligentai.services";
 const TO_NAME = "AI Intelligent Services";
+
+// Minimum time (ms) a real human takes to read + fill the form. Bots are faster.
+const MIN_FILL_MS = 3000;
+
+// Simple per-IP rate limit. Fluid Compute reuses instances, so this state
+// survives across requests on a warm instance — meaningful, but best-effort
+// (not shared across regions/cold starts). For hard guarantees use the Vercel
+// WAF rate-limiting rule or Upstash Redis.
+const RATE_LIMIT_MAX = 3; // submissions allowed
+const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000; // per 10 minutes
+const submissions = new Map<string, number[]>();
+
+function isRateLimited(ip: string): boolean {
+  const now = Date.now();
+  const recent = (submissions.get(ip) ?? []).filter(
+    (t) => now - t < RATE_LIMIT_WINDOW_MS
+  );
+  recent.push(now);
+  submissions.set(ip, recent);
+  return recent.length > RATE_LIMIT_MAX;
+}
+
+// Server-side validation mirroring the client form. A bot POSTing directly to
+// this route with garbage gets rejected here regardless of the UI.
+const contactSchema = z.object({
+  name: z.string().trim().min(2).max(100),
+  email: z.string().trim().email().max(200),
+  phone: z.string().trim().max(40).optional().or(z.literal("")),
+  projectType: z.enum(["residential", "corporate", "both", "other"]),
+  budget: z.enum([
+    "under-50k",
+    "50k-150k",
+    "150k-500k",
+    "500k-plus",
+    "prefer-not-to-say",
+  ]),
+  message: z.string().trim().min(20).max(5000),
+  // Honeypot — must be empty.
+  company: z.string().optional(),
+  // Time spent on the page before submitting.
+  elapsedMs: z.number().optional(),
+});
 
 const budgetLabels: Record<string, string> = {
   "under-50k": "Under $50,000",
@@ -21,30 +65,49 @@ const projectTypeLabels: Record<string, string> = {
 };
 
 export async function POST(req: NextRequest) {
+  // Vercel BotID — invisible bot verification. Runs before any work is done.
+  const verification = await checkBotId();
+  if (verification.isBot) {
+    return NextResponse.json({ error: "Access denied." }, { status: 403 });
+  }
+
   const apiKey = process.env.BREVO_API_KEY;
   if (!apiKey) {
     return NextResponse.json({ error: "Email service not configured." }, { status: 500 });
   }
 
-  let body: {
-    name?: string;
-    email?: string;
-    phone?: string;
-    projectType?: string;
-    budget?: string;
-    message?: string;
-  };
+  // Rate limit by client IP
+  const ip =
+    req.headers.get("x-forwarded-for")?.split(",")[0].trim() ||
+    req.headers.get("x-real-ip") ||
+    "unknown";
+  if (isRateLimited(ip)) {
+    return NextResponse.json(
+      { error: "Too many submissions. Please try again later or call us directly." },
+      { status: 429 }
+    );
+  }
 
+  let raw: unknown;
   try {
-    body = await req.json();
+    raw = await req.json();
   } catch {
     return NextResponse.json({ error: "Invalid request." }, { status: 400 });
   }
 
-  const { name, email, phone, projectType, budget, message } = body;
+  const parsed = contactSchema.safeParse(raw);
+  if (!parsed.success) {
+    return NextResponse.json({ error: "Missing or invalid fields." }, { status: 400 });
+  }
 
-  if (!name || !email || !projectType || !budget || !message) {
-    return NextResponse.json({ error: "Missing required fields." }, { status: 400 });
+  const { name, email, phone, projectType, budget, message, company, elapsedMs } =
+    parsed.data;
+
+  // Honeypot: real users never see or fill this field. If it has a value, it's a bot.
+  // Timing trap: a genuine inquiry takes seconds to type; bots submit near-instantly.
+  // Respond 200 so the bot believes it succeeded and doesn't retry/adapt.
+  if (company || (typeof elapsedMs === "number" && elapsedMs < MIN_FILL_MS)) {
+    return NextResponse.json({ success: true });
   }
 
   const htmlContent = `

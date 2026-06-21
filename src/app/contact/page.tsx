@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -36,6 +36,16 @@ export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
 
+  // Bot defenses (no external dependencies):
+  // 1. Honeypot — a hidden field real users never see; bots auto-fill it.
+  // 2. Timing trap — record when the form mounted; bots submit near-instantly.
+  const honeypotRef = useRef<HTMLInputElement>(null);
+  const loadedAtRef = useRef<number>(0);
+
+  useEffect(() => {
+    loadedAtRef.current = Date.now();
+  }, []);
+
   const {
     register,
     handleSubmit,
@@ -54,7 +64,13 @@ export default function ContactPage() {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+        body: JSON.stringify({
+          ...data,
+          // Honeypot value (should always be empty for real users)
+          company: honeypotRef.current?.value ?? "",
+          // Milliseconds the user spent on the page before submitting
+          elapsedMs: loadedAtRef.current ? Date.now() - loadedAtRef.current : 0,
+        }),
       });
       const json = await res.json();
       if (!res.ok) {
@@ -125,6 +141,17 @@ export default function ContactPage() {
             {/* Form */}
             <div className="lg:col-span-3">
               <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-6">
+                {/* Honeypot — hidden from humans, irresistible to bots. Do not remove. */}
+                <input
+                  ref={honeypotRef}
+                  type="text"
+                  name="company"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  aria-hidden="true"
+                  className="absolute -left-[9999px] top-0 h-0 w-0 opacity-0"
+                />
+
                 {/* Name + Email */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                   <div>
