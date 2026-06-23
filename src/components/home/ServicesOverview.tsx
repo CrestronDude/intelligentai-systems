@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import TiltCard from "@/components/ui/TiltCard";
 import CahoniLink from "@/components/ui/CahoniLink";
@@ -37,7 +38,7 @@ const cards: {
     subtitle: "Dolby Atmos · 4K/8K · Invisible Speaker",
     description:
       "Purpose-built home theaters and whole-home audio systems. Invisible speakers, calibrated acoustics, and extraordinary sound.",
-    href: "/services#home-cinema",
+    href: "/services#home-theater",
     image: "https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?w=600&q=80&fit=crop",
   },
   {
@@ -63,12 +64,12 @@ function ServiceCard({ card }: { card: (typeof cards)[0] }) {
       <div className="card-gradient border border-charcoal-500 hover:border-gold/30 transition-colors duration-500 flex flex-col h-full group overflow-hidden">
         {/* Image strip */}
         <div className="relative h-44 overflow-hidden flex-shrink-0">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <Image
             src={card.image}
             alt={card.title}
-            className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
-            loading="lazy"
+            fill
+            className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 320px"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-charcoal-700/90" />
           {/* Number overlay */}

@@ -4,7 +4,10 @@ import TrustBar from "@/components/home/TrustBar";
 import ServicesOverview from "@/components/home/ServicesOverview";
 import FeaturedProjects from "@/components/home/FeaturedProjects";
 import WhyUs from "@/components/home/WhyUs";
+import Testimonials from "@/components/home/Testimonials";
+import Assurance from "@/components/home/Assurance";
 import AIToolsSection from "@/components/home/AIToolsSection";
+import FAQ from "@/components/home/FAQ";
 import FinalCTA from "@/components/home/FinalCTA";
 
 export default function Home() {
@@ -16,7 +19,10 @@ export default function Home() {
       <ServicesOverview />
       <FeaturedProjects />
       <WhyUs />
+      <Testimonials />
+      <Assurance />
       <AIToolsSection />
+      <FAQ />
       <FinalCTA />
     </>
   );

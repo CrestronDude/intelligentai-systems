@@ -19,8 +19,10 @@
   --color-cream-dark: #EAE3D6;
   --color-cream-muted: #D4C9B8;
 
-  --color-warm-gray: #7A7670;
-  --color-warm-gray-light: #A09C96;
+  /* Lightened for WCAG AA contrast on the near-black charcoal background
+     (was #7A7670 / #A09C96, which failed AA for small secondary text). */
+  --color-warm-gray: #948D85;
+  --color-warm-gray-light: #B0AAA2;
 
   /* Semantic */
   --color-background: var(--color-charcoal);
@@ -66,6 +68,64 @@ body {
 ::selection {
   background-color: var(--color-gold);
   color: var(--color-charcoal);
+}
+
+/* ─── Focus visibility (keyboard accessibility) ─────────────────────────────── */
+
+:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 3px;
+  border-radius: 1px;
+}
+
+/* Skip-to-content link — hidden until focused */
+.skip-link {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  z-index: 100;
+  padding: 0.75rem 1.25rem;
+  background: var(--color-gold);
+  color: var(--color-charcoal);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  transform: translateY(-150%);
+  transition: transform 0.2s ease;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+/* ─── Reduced motion ─────────────────────────────────────────────────────────
+   The site is animation-heavy (parallax, ken-burns, scroll journeys, shimmer).
+   Honor the user's OS-level "reduce motion" preference for accessibility. */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .room-image-active,
+  .btn-gold-shimmer::after,
+  .svg-path-animated {
+    animation: none !important;
+  }
+
+  .image-luxury:hover {
+    transform: none;
+  }
 }
 
 /* ─── Scrollbar ───────────────────────────────────────────────────────────── */
