@@ -9,6 +9,8 @@ import { Menu, X } from "lucide-react";
 const navLinks = [
   { href: "/", label: "Home" },
   { href: "/services", label: "Services" },
+  { href: "/invisible-audio", label: "Invisible Audio" },
+  { href: "/outdoor", label: "Outdoor" },
   { href: "/projects", label: "Work" },
   { href: "/about", label: "About" },
 ];

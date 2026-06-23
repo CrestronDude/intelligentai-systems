@@ -5,6 +5,8 @@ const services = [
   { label: "Distributed Audio & Video", href: "/services#distributed-av" },
   { label: "Lighting & Shading", href: "/services#lighting-shading" },
   { label: "Home Cinema & AV", href: "/services#home-theater" },
+  { label: "Invisible Audio — JBL CONCEAL", href: "/invisible-audio" },
+  { label: "Outdoor Living", href: "/outdoor" },
   { label: "Corporate AV Integration", href: "/services#corporate-av" },
   { label: "Boardroom Design", href: "/services#boardroom-av" },
   { label: "Cahoni AI — Quoting Platform", href: "https://intelligentai.services/", external: true },
@@ -25,6 +27,7 @@ const brands = [
   "Lutron",
   "Shure",
   "Bose Professional",
+  "JBL",
   "Sonance",
 ];
 

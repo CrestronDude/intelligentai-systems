@@ -50,7 +50,7 @@ export const homeAutomationServices: Service[] = [
       "Dante network audio backbone",
       "Zone control via touchscreen, keypad, or mobile",
     ],
-    systems: ["Crestron NVX", "Q-SYS Core", "Sonance Invisible", "Dante Protocol", "Bose Professional"],
+    systems: ["Crestron NVX", "Q-SYS Core", "JBL Conceal", "Sonance Invisible", "Dante Protocol", "Bose Professional"],
     image: "https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?w=1200&q=80&fit=crop",
   },
   {
@@ -86,7 +86,7 @@ export const homeAutomationServices: Service[] = [
       "Multi-room audio distribution",
       "Outdoor entertainment systems",
     ],
-    systems: ["Sonance", "Polk Audio Reserve", "Denon", "JVC Projectors", "Stewart Filmscreen"],
+    systems: ["JBL Conceal", "Sonance", "Polk Audio Reserve", "Denon", "JVC Projectors", "Stewart Filmscreen"],
     image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&q=80&fit=crop",
   },
   {
