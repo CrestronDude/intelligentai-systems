@@ -1,7 +1,13 @@
 "use client";
 
-import { useEffect, useRef, useState, useCallback } from "react";
+import { useRef } from "react";
 import Image from "next/image";
+import { useWalkthroughIndex } from "@/components/shared/useWalkthroughIndex";
+
+// Scroll travel per room (vh) and per-step dwell (ms) — matched to the CSS
+// transition durations so each room cross-fades fully before the next begins.
+const VH_PER_ROOM = 120;
+const STEP_MS = 1100;
 
 /* ── Room data ─────────────────────────────────────────────── */
 const rooms = [
@@ -178,42 +184,12 @@ function FloorPlan({ activeRoom }: { activeRoom: number }) {
 /* ── Main Component ─────────────────────────────────────────── */
 export default function RoomJourney() {
   const sectionRef = useRef<HTMLElement>(null);
-  const [activeRoom, setActiveRoom] = useState(0);
-  const [prevRoom, setPrevRoom] = useState(-1);
-  const rafRef = useRef<number>(0);
-
-  const update = useCallback(() => {
-    const section = sectionRef.current;
-    if (!section) return;
-    const rect = section.getBoundingClientRect();
-    const sectionScrollable = section.offsetHeight - window.innerHeight;
-    const scrolled = Math.max(0, -rect.top);
-    const progress = Math.min(1, scrolled / sectionScrollable);
-    const roomFloat = progress * rooms.length;
-    const idx = Math.min(Math.floor(roomFloat), rooms.length - 1);
-    setActiveRoom((prev) => {
-      if (prev !== idx) setPrevRoom(prev);
-      return idx;
-    });
-  }, []);
-
-  useEffect(() => {
-    const onScroll = () => {
-      cancelAnimationFrame(rafRef.current);
-      rafRef.current = requestAnimationFrame(update);
-    };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    update();
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-      cancelAnimationFrame(rafRef.current);
-    };
-  }, [update]);
+  const activeRoom = useWalkthroughIndex(sectionRef, rooms.length, STEP_MS);
 
   return (
     <section
       ref={sectionRef}
-      style={{ height: `${rooms.length * 100}vh` }}
+      style={{ height: `${rooms.length * VH_PER_ROOM}vh` }}
       aria-label="Room journey"
     >
       {/* Sticky viewport */}
@@ -228,7 +204,7 @@ export default function RoomJourney() {
             className="absolute inset-0"
             style={{
               opacity: i === activeRoom ? 1 : 0,
-              transition: "opacity 1s cubic-bezier(0.16,1,0.3,1)",
+              transition: "opacity 1.1s cubic-bezier(0.33,1,0.68,1)",
               zIndex: i === activeRoom ? 1 : 0,
             }}
             aria-hidden={i !== activeRoom}
@@ -273,7 +249,7 @@ export default function RoomJourney() {
                         : "-24px"
                     })`,
                     transition:
-                      "opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1)",
+                      "opacity 0.9s cubic-bezier(0.33,1,0.68,1), transform 0.9s cubic-bezier(0.33,1,0.68,1)",
                     pointerEvents: i === activeRoom ? "auto" : "none",
                     paddingLeft: "clamp(1.25rem, 5vw, 5rem)",
                     paddingRight: "clamp(1.25rem, 5vw, 5rem)",
