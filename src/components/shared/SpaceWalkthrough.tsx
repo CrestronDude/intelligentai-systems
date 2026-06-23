@@ -1,15 +1,7 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import Image from "next/image";
-import { useWalkthroughIndex } from "./useWalkthroughIndex";
-
-// Scroll travel allotted per space (vh). More travel = less twitchy mapping so
-// each room feels deliberate rather than flicking past.
-const VH_PER_SPACE = 120;
-// How long each space holds before the next cross-fade — matches the CSS
-// transition durations below so transitions always play fully and fluidly.
-const STEP_MS = 1100;
 
 /**
  * SpaceWalkthrough — a reusable, scroll-driven "walk through the spaces" section.
@@ -44,12 +36,37 @@ export default function SpaceWalkthrough({
   eyebrow?: string;
 }) {
   const sectionRef = useRef<HTMLElement>(null);
-  const active = useWalkthroughIndex(sectionRef, spaces.length, STEP_MS);
+  const [active, setActive] = useState(0);
+  const rafRef = useRef<number>(0);
+
+  const update = useCallback(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+    const rect = section.getBoundingClientRect();
+    const scrollable = section.offsetHeight - window.innerHeight;
+    const scrolled = Math.max(0, -rect.top);
+    const progress = scrollable > 0 ? Math.min(1, scrolled / scrollable) : 0;
+    const idx = Math.min(Math.floor(progress * spaces.length), spaces.length - 1);
+    setActive(idx);
+  }, [spaces.length]);
+
+  useEffect(() => {
+    const onScroll = () => {
+      cancelAnimationFrame(rafRef.current);
+      rafRef.current = requestAnimationFrame(update);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    update();
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      cancelAnimationFrame(rafRef.current);
+    };
+  }, [update]);
 
   return (
     <section
       ref={sectionRef}
-      style={{ height: `${spaces.length * VH_PER_SPACE}vh` }}
+      style={{ height: `${spaces.length * 100}vh` }}
       aria-label={eyebrow ? `${eyebrow} walkthrough` : "Spaces walkthrough"}
     >
       <div className="sticky top-0 h-screen overflow-hidden" style={{ willChange: "transform" }}>
@@ -60,7 +77,7 @@ export default function SpaceWalkthrough({
             className="absolute inset-0"
             style={{
               opacity: i === active ? 1 : 0,
-              transition: "opacity 1.1s cubic-bezier(0.33,1,0.68,1)",
+              transition: "opacity 1s cubic-bezier(0.16,1,0.3,1)",
               zIndex: i === active ? 1 : 0,
             }}
             aria-hidden={i !== active}
@@ -100,7 +117,7 @@ export default function SpaceWalkthrough({
                       i === active ? "-50%" : i > active ? "calc(-50% + 24px)" : "calc(-50% - 24px)"
                     })`,
                     transition:
-                      "opacity 0.9s cubic-bezier(0.33,1,0.68,1), transform 0.9s cubic-bezier(0.33,1,0.68,1)",
+                      "opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1)",
                     pointerEvents: i === active ? "auto" : "none",
                   }}
                 >
