@@ -5,12 +5,26 @@ import Image from "next/image";
 import Link from "next/link";
 import { projects, type ProjectCategory } from "@/lib/data/projects";
 import { cn } from "@/lib/utils";
+import SpaceWalkthrough, { type Space } from "@/components/shared/SpaceWalkthrough";
 
 const filters: { label: string; value: ProjectCategory | "all" }[] = [
   { label: "All Projects", value: "all" },
   { label: "Residential", value: "residential" },
   { label: "Corporate AV", value: "corporate" },
 ];
+
+// Featured projects presented as a scroll-driven walkthrough above the
+// filterable grid (which retains the full case-study modals).
+const projectSpaces: Space[] = projects.map((p, i) => ({
+  number: String(i + 1).padStart(2, "0"),
+  label: p.category === "corporate" && p.client ? p.client : p.location,
+  title: p.title,
+  body: p.tagline,
+  image: p.heroImage,
+  imageAlt: p.address,
+  features: p.scope.slice(0, 2),
+  tags: p.systems.slice(0, 3),
+}));
 
 export default function ProjectsPage() {
   const [filter, setFilter] = useState<ProjectCategory | "all">("all");
@@ -50,12 +64,27 @@ export default function ProjectsPage() {
             from Rosedale and The Bridal Path to the boardrooms of Nestlé, Kraft Heinz,
             Osler, and Mead Johnson.
           </p>
+          <span className="inline-flex items-center gap-3 text-label text-cream-muted mt-8">
+            <span className="w-8 h-px bg-gold" />
+            Scroll to walk through the work
+          </span>
         </div>
       </section>
 
+      {/* Scroll-driven walkthrough of featured projects */}
+      <SpaceWalkthrough spaces={projectSpaces} eyebrow="Our Work" />
+
       {/* Filter + Grid */}
-      <section className="section-padding bg-charcoal">
+      <section className="section-padding bg-charcoal border-t border-charcoal-500">
         <div className="container-luxury">
+          {/* Section heading */}
+          <div className="max-w-xl mb-12">
+            <span className="text-label text-gold block mb-4">The Full Portfolio</span>
+            <h2 className="text-display-md text-cream">
+              Browse every case study.
+            </h2>
+          </div>
+
           {/* Filters */}
           <div className="flex flex-wrap gap-3 mb-12">
             {filters.map((f) => (
