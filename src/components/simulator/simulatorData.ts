@@ -1,10 +1,18 @@
 // ─── Smart Home Simulator — configuration & types ───────────────────────────
-// A fully client-side virtual home. Rooms each hold lighting, shade, audio, and
-// video state; control interfaces (touch panel / remote) mutate it; the stage
-// reacts in real time. Audio is synthesized with the Web Audio API; video uses
-// public sample clips, so there are no asset dependencies to break.
+// A photoreal virtual home. Each room's controllable elements are mapped to
+// their ACTUAL location in the room photo: the theater's video plays on the real
+// screen; living/bedroom motorized shades sit over the real windows. Lighting
+// dims the real fixtures via brightness. Audio & video are real, self-hosted
+// files under /public/media.
 
-export type RoomId = "living" | "theater" | "bedroom" | "outdoor";
+export interface Rect {
+  left: number;
+  top: number;
+  width: number;
+  height: number;
+}
+
+export type RoomId = "theater" | "living" | "bedroom" | "outdoor";
 
 export interface RoomConfig {
   id: RoomId;
@@ -13,18 +21,11 @@ export interface RoomConfig {
   backdrop: string;
   hasVideo: boolean;
   hasShades: boolean;
+  screen?: Rect; // where the display lives in the photo (%)
+  window?: Rect; // where the powered shade covers the window (%)
 }
 
 export const ROOMS: RoomConfig[] = [
-  {
-    id: "living",
-    name: "Living Room",
-    subtitle: "Great Room",
-    backdrop:
-      "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1600&q=85&fit=crop",
-    hasVideo: true,
-    hasShades: true,
-  },
   {
     id: "theater",
     name: "Home Theater",
@@ -32,6 +33,17 @@ export const ROOMS: RoomConfig[] = [
     backdrop: "/images/home-theater.jpg",
     hasVideo: true,
     hasShades: false,
+    screen: { left: 18.7, top: 8.5, width: 62, height: 46.5 },
+  },
+  {
+    id: "living",
+    name: "Living Room",
+    subtitle: "Great Room",
+    backdrop:
+      "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1600&q=85&fit=crop",
+    hasVideo: false,
+    hasShades: true,
+    window: { left: 1, top: 3, width: 31, height: 86 },
   },
   {
     id: "bedroom",
@@ -39,8 +51,9 @@ export const ROOMS: RoomConfig[] = [
     subtitle: "Bedroom",
     backdrop:
       "https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=1600&q=85&fit=crop",
-    hasVideo: true,
+    hasVideo: false,
     hasShades: true,
+    window: { left: 62, top: 17, width: 35, height: 57 },
   },
   {
     id: "outdoor",
@@ -53,7 +66,6 @@ export const ROOMS: RoomConfig[] = [
   },
 ];
 
-// Lighting color presets — `tint` is an "R,G,B" string used for the overlay.
 export interface LightColor {
   id: string;
   label: string;
@@ -69,36 +81,32 @@ export const LIGHT_COLORS: LightColor[] = [
   { id: "gold", label: "Gold", tint: "201,169,110" },
 ];
 
-// Audio "stations" — each is a chord (Hz) the Web Audio engine retunes to.
+// Audio "stations" → real, self-hosted tracks.
 export interface AudioSource {
   id: string;
   name: string;
-  freqs: number[];
+  file: string;
 }
 
 export const AUDIO_SOURCES: AudioSource[] = [
-  { id: "ambient", name: "Ambient", freqs: [110.0, 164.81, 220.0] },
-  { id: "jazz", name: "Lounge Jazz", freqs: [130.81, 196.0, 246.94] },
-  { id: "classical", name: "Classical", freqs: [146.83, 220.0, 293.66] },
-  { id: "chill", name: "Chillhop", freqs: [98.0, 146.83, 196.0] },
+  { id: "chill", name: "Chillhop", file: "/media/audio/track-1.mp3" },
+  { id: "lounge", name: "Lounge", file: "/media/audio/track-2.mp3" },
+  { id: "energy", name: "Uptempo", file: "/media/audio/track-3.mp3" },
 ];
 
-// Video sources — public sample clips (Google sample bucket).
+// Video sources → real, self-hosted clips.
 export interface VideoSource {
   id: string;
   name: string;
   url: string;
 }
 
-const GTV = "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample";
 export const VIDEO_SOURCES: VideoSource[] = [
-  { id: "cinema", name: "Cinema One", url: `${GTV}/BigBuckBunny.mp4` },
-  { id: "studio", name: "Studio", url: `${GTV}/Sintel.mp4` },
-  { id: "docu", name: "Documentary", url: `${GTV}/ElephantsDream.mp4` },
-  { id: "action", name: "Action", url: `${GTV}/TearsOfSteel.mp4` },
+  { id: "cinema", name: "Cinema One", url: "/media/video/cinema.mp4" },
+  { id: "nature", name: "Nature", url: "/media/video/nature.mp4" },
+  { id: "studio", name: "Studio", url: "/media/video/studio.mp4" },
 ];
 
-// Per-room runtime state.
 export interface RoomState {
   lightOn: boolean;
   brightness: number; // 0–100
@@ -109,7 +117,7 @@ export interface RoomState {
   volume: number; // 0–100
   videoOn: boolean;
   videoSource: string;
-  temp: number; // °F setpoint
+  temp: number; // °F
 }
 
 export function defaultRoomState(): RoomState {
@@ -119,7 +127,7 @@ export function defaultRoomState(): RoomState {
     colorId: "warm",
     shades: 100,
     audioOn: false,
-    audioSource: "ambient",
+    audioSource: "chill",
     volume: 45,
     videoOn: false,
     videoSource: "cinema",
@@ -127,7 +135,6 @@ export function defaultRoomState(): RoomState {
   };
 }
 
-// Scenes apply a partial patch to the active room.
 export interface Scene {
   id: string;
   name: string;
@@ -135,41 +142,19 @@ export interface Scene {
 }
 
 export const SCENES: Scene[] = [
-  {
-    id: "morning",
-    name: "Morning",
-    patch: { lightOn: true, brightness: 70, colorId: "neutral", shades: 100, audioOn: true, audioSource: "chill", videoOn: false },
-  },
-  {
-    id: "day",
-    name: "Day",
-    patch: { lightOn: true, brightness: 95, colorId: "cool", shades: 100, audioOn: false, videoOn: false },
-  },
-  {
-    id: "evening",
-    name: "Evening",
-    patch: { lightOn: true, brightness: 42, colorId: "warm", shades: 35, audioOn: true, audioSource: "jazz", videoOn: false },
-  },
-  {
-    id: "movie",
-    name: "Movie Night",
-    patch: { lightOn: true, brightness: 10, colorId: "violet", shades: 0, audioOn: false, videoOn: true, videoSource: "cinema" },
-  },
-  {
-    id: "party",
-    name: "Entertain",
-    patch: { lightOn: true, brightness: 58, colorId: "amber", shades: 55, audioOn: true, audioSource: "ambient", videoOn: false },
-  },
-  {
-    id: "goodnight",
-    name: "Goodnight",
-    patch: { lightOn: false, brightness: 0, shades: 0, audioOn: false, videoOn: false },
-  },
+  { id: "morning", name: "Morning", patch: { lightOn: true, brightness: 70, colorId: "neutral", shades: 100, audioOn: true, audioSource: "chill", videoOn: false } },
+  { id: "day", name: "Day", patch: { lightOn: true, brightness: 95, colorId: "cool", shades: 100, audioOn: false, videoOn: false } },
+  { id: "evening", name: "Evening", patch: { lightOn: true, brightness: 42, colorId: "warm", shades: 35, audioOn: true, audioSource: "lounge", videoOn: false } },
+  { id: "movie", name: "Movie Night", patch: { lightOn: true, brightness: 9, colorId: "violet", shades: 0, audioOn: false, videoOn: true, videoSource: "cinema" } },
+  { id: "party", name: "Entertain", patch: { lightOn: true, brightness: 58, colorId: "amber", shades: 55, audioOn: true, audioSource: "energy", videoOn: false } },
+  { id: "goodnight", name: "Goodnight", patch: { lightOn: false, brightness: 0, shades: 0, audioOn: false, videoOn: false } },
 ];
 
 export const tintOf = (id: string) =>
   LIGHT_COLORS.find((c) => c.id === id)?.tint ?? "255,241,224";
 export const audioName = (id: string) =>
   AUDIO_SOURCES.find((a) => a.id === id)?.name ?? id;
+export const audioFileOf = (id: string) =>
+  AUDIO_SOURCES.find((a) => a.id === id)?.file ?? AUDIO_SOURCES[0].file;
 export const videoOf = (id: string) =>
   VIDEO_SOURCES.find((v) => v.id === id) ?? VIDEO_SOURCES[0];

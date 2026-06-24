@@ -25,7 +25,7 @@ export default function RoomStage({
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const [levels, setLevels] = useState<number[]>(new Array(BARS).fill(0));
 
-  // ── Video playback ──────────────────────────────────────────────
+  // ── Video plays on the room's real screen ───────────────────────
   useEffect(() => {
     const v = videoRef.current;
     if (!v) return;
@@ -36,7 +36,6 @@ export default function RoomStage({
     }
     if (room.hasVideo && state.videoOn) {
       v.play().catch(() => {
-        // Sound autoplay blocked — fall back to muted playback.
         v.muted = true;
         v.play().catch(() => {});
       });
@@ -59,98 +58,74 @@ export default function RoomStage({
   const lit = state.lightOn;
   const b = state.brightness / 100;
   const tint = tintOf(state.colorId);
-  // Backdrop brightness from lighting + shade daylight.
-  const filterBrightness = lit ? 0.4 + b * 0.8 : 0.22;
-  const darkness = lit ? (1 - b) * 0.55 : 0.84;
-  const shadeDark = room.hasShades ? (1 - state.shades / 100) * 0.28 : 0;
-  const shadeCover = 100 - state.shades; // % of window covered
+  const filterBrightness = lit ? 0.4 + b * 0.82 : 0.2;
+  const darkness = lit ? (1 - b) * 0.55 : 0.85;
+  const shadeDark = room.hasShades ? (1 - state.shades / 100) * 0.26 : 0;
+  const coverPct = 100 - state.shades; // % of window the shade covers
+
+  const pctStyle = (r?: { left: number; top: number; width: number; height: number }) =>
+    r ? { left: `${r.left}%`, top: `${r.top}%`, width: `${r.width}%`, height: `${r.height}%` } : {};
 
   return (
     <div className="relative w-full h-full overflow-hidden bg-charcoal select-none">
-      {/* Backdrop */}
+      {/* Backdrop — real fixtures dim with brightness */}
       <div
         className="absolute inset-0 transition-[filter] duration-700"
-        style={{ filter: `brightness(${filterBrightness}) saturate(1.05)` }}
+        style={{ filter: `brightness(${filterBrightness}) saturate(1.06)` }}
       >
-        <Image
-          src={room.backdrop}
-          alt={room.name}
-          fill
-          priority
-          className="object-cover object-center"
-          sizes="100vw"
-        />
+        <Image src={room.backdrop} alt={room.name} fill priority className="object-cover object-center" sizes="100vw" />
       </div>
 
       {/* Light color wash */}
       <div
         className="absolute inset-0 transition-opacity duration-700"
+        style={{ backgroundColor: `rgba(${tint},${lit ? 0.24 : 0})`, mixBlendMode: "soft-light" }}
+      />
+      {/* Warm "lit" ambiance from fixtures */}
+      <div
+        className="absolute inset-0 pointer-events-none transition-opacity duration-700"
         style={{
-          backgroundColor: `rgba(${tint},${lit ? 0.26 : 0})`,
-          mixBlendMode: "soft-light",
+          opacity: lit ? b * 0.5 : 0,
+          background: `radial-gradient(120% 80% at 50% 0%, rgba(${tint},0.22), transparent 60%)`,
         }}
       />
-      {/* Darkness / dim */}
+      {/* Dim */}
       <div
         className="absolute inset-0 transition-opacity duration-700"
-        style={{ backgroundColor: `rgba(6,8,18,${Math.min(0.92, darkness + shadeDark)})` }}
+        style={{ backgroundColor: `rgba(6,8,18,${Math.min(0.93, darkness + shadeDark)})` }}
       />
       {/* Vignette */}
       <div
         className="absolute inset-0 pointer-events-none"
-        style={{ background: "radial-gradient(ellipse at 50% 40%, transparent 45%, rgba(6,8,18,0.6) 100%)" }}
+        style={{ background: "radial-gradient(ellipse at 50% 42%, transparent 46%, rgba(6,8,18,0.6) 100%)" }}
       />
 
-      {/* Window + powered blinds */}
-      {room.hasShades && (
-        <div className="absolute top-[8%] left-[5%] w-[26%] max-w-[230px] aspect-[3/4] hidden sm:block">
-          <div className="relative w-full h-full border border-cream/15 overflow-hidden"
-            style={{ background: "linear-gradient(180deg, #bcd3ef 0%, #e9d7b8 75%, #d8b98e 100%)" }}>
-            {/* daylight glow */}
-            <div className="absolute inset-0" style={{ opacity: state.shades / 100, background: "radial-gradient(circle at 50% 30%, rgba(255,245,210,0.7), transparent 70%)" }} />
-            {/* blinds */}
-            <div
-              className="absolute top-0 left-0 right-0 transition-[height] duration-[900ms] ease-out"
-              style={{
-                height: `${shadeCover}%`,
-                backgroundImage:
-                  "repeating-linear-gradient(180deg, rgba(28,28,28,0.96) 0px, rgba(40,40,40,0.96) 7px, rgba(20,20,20,0.96) 9px)",
-                boxShadow: "0 6px 10px rgba(0,0,0,0.4)",
-              }}
-            />
-            <div className="absolute inset-0 border border-charcoal-700 pointer-events-none" />
+      {/* Powered shade over the real window */}
+      {room.hasShades && room.window && (
+        <div className="absolute" style={pctStyle(room.window)}>
+          {/* Daylight that the shade blocks */}
+          <div className="absolute inset-0 transition-opacity duration-700" style={{ opacity: (state.shades / 100) * (lit ? 1 : 0.6), background: "linear-gradient(180deg, rgba(220,235,255,0.45), rgba(255,240,210,0.25))" }} />
+          {/* Roller shade */}
+          <div
+            className="absolute top-0 left-0 right-0 transition-[height] duration-[900ms] ease-out overflow-hidden"
+            style={{ height: `${coverPct}%` }}
+          >
+            <div className="w-full h-full" style={{ backgroundImage: "repeating-linear-gradient(180deg, rgba(30,28,24,0.97) 0px, rgba(46,42,36,0.97) 6px, rgba(24,22,19,0.97) 8px)", boxShadow: "0 8px 14px rgba(0,0,0,0.5)" }} />
+            <div className="absolute bottom-0 left-0 right-0 h-1.5 bg-charcoal-600" />
           </div>
-          <span className="text-label text-cream-muted text-[0.5rem] mt-2 block tracking-[0.2em]">
-            Shades · {state.shades}%
-          </span>
         </div>
       )}
 
-      {/* Wall-mounted display */}
-      {room.hasVideo && (
-        <div className="absolute top-1/2 right-[6%] -translate-y-1/2 w-[52%] max-w-[640px]">
-          <div className="relative aspect-video bg-black border border-charcoal-600 shadow-2xl overflow-hidden">
-            <video
-              ref={videoRef}
-              className="w-full h-full object-cover"
-              playsInline
-              loop
-              preload="metadata"
-              poster=""
-            />
-            {!state.videoOn && (
-              <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-charcoal-800 to-black">
-                <span className="w-2 h-2 rounded-full bg-gold/60 animate-pulse" />
-              </div>
-            )}
-            {/* screen sheen */}
-            <div className="absolute inset-0 pointer-events-none" style={{ background: "linear-gradient(120deg, rgba(255,255,255,0.06) 0%, transparent 35%)" }} />
-          </div>
-          <div className="flex items-center justify-between mt-2">
-            <span className="text-label text-cream-muted text-[0.5rem] tracking-[0.2em]">
-              Display · {state.videoOn ? videoOf(state.videoSource).name : "Standby"}
-            </span>
-          </div>
+      {/* Video on the real display */}
+      {room.hasVideo && room.screen && (
+        <div className="absolute overflow-hidden" style={pctStyle(room.screen)}>
+          <video ref={videoRef} className="w-full h-full object-cover" playsInline loop preload="metadata" />
+          {!state.videoOn && (
+            <div className="absolute inset-0 bg-black/92 flex items-center justify-center">
+              <span className="w-2 h-2 rounded-full bg-gold/50 animate-pulse" />
+            </div>
+          )}
+          <div className="absolute inset-0 pointer-events-none" style={{ background: "linear-gradient(120deg, rgba(255,255,255,0.07) 0%, transparent 38%)" }} />
         </div>
       )}
 
@@ -162,19 +137,12 @@ export default function RoomStage({
           </span>
           <div className="flex items-end gap-[3px] h-10">
             {levels.map((l, i) => (
-              <span
-                key={i}
-                className="w-[3px] bg-gold/80 rounded-full"
-                style={{ height: `${state.audioOn ? Math.max(6, l * 100) : 4}%`, transition: "height 90ms linear" }}
-              />
+              <span key={i} className="w-[3px] bg-gold/80 rounded-full" style={{ height: `${state.audioOn ? Math.max(6, l * 100) : 4}%`, transition: "height 90ms linear" }} />
             ))}
           </div>
         </div>
-        {/* Room HUD */}
         <div className="text-right glass border border-gold/15 px-4 py-2.5">
-          <span className="text-label text-gold text-[0.5rem] tracking-[0.2em] block">
-            {room.name}
-          </span>
+          <span className="text-label text-gold text-[0.5rem] tracking-[0.2em] block">{room.name}</span>
           <span className="text-cream text-sm font-display">
             {lit ? `${state.brightness}%` : "Lights Off"} · {state.temp}°F
           </span>

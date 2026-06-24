@@ -8,7 +8,7 @@ import { useHomeAudio } from "./useHomeAudio";
 import {
   ROOMS,
   SCENES,
-  AUDIO_SOURCES,
+  audioFileOf,
   defaultRoomState,
   type RoomId,
   type RoomState,
@@ -45,7 +45,7 @@ function reducer(s: HomeState, a: Action): HomeState {
 
 function init(): HomeState {
   return {
-    activeRoom: "living",
+    activeRoom: "theater",
     rooms: {
       living: defaultRoomState(),
       theater: { ...defaultRoomState(), brightness: 35, colorId: "violet" },
@@ -72,8 +72,7 @@ export default function Simulator() {
 
   // Drive the audio engine from the active room's audio state.
   useEffect(() => {
-    const src = AUDIO_SOURCES.find((a) => a.id === active.audioSource);
-    if (src) audio.setChord(src.freqs);
+    audio.setTrack(audioFileOf(active.audioSource));
     audio.setVolume(active.volume / 100);
     audio.setPlaying(active.audioOn);
   }, [state.activeRoom, active.audioOn, active.audioSource, active.volume, audio]);
