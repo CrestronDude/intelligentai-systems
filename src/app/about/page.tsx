@@ -7,13 +7,15 @@ import { certificationGroups, affiliations } from "@/lib/data/certifications";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "Design Engineer at Telus Canada and Microsoft Teams Engineer at Nestlé Canada. Crestron, Q-SYS, AMX, Extron, Biamp, and Microsoft 365 Collaboration Communications (Teams) certified — serving Toronto and across Canada with AI Intelligent Services.",
+    "Design Engineer at Telus Canada and Microsoft Teams Engineer at Nestlé Canada. Crestron, RTI, Q-SYS, AMX, Extron, Biamp, Lutron, and Microsoft 365 Collaboration Communications (Teams) certified — serving Toronto and across Canada with AI Intelligent Services.",
 };
 
 const milestones: { year: string; event: React.ReactNode }[] = [
   { year: "2009", event: "First Crestron programming certification — residential automation specialist" },
   { year: "2011", event: "Design Engineer role at Telus Canada, Toronto — enterprise-scale AV & structured cabling" },
   { year: "2013", event: "Q-SYS commercial audio/video certification — corporate AV integration" },
+  { year: "2014", event: "Lutron RadioRA & Ketra tunable-lighting certification" },
+  { year: "2015", event: "RTI Master Programmer certification achieved" },
   { year: "2016", event: "Meeting Room Technology / Microsoft Teams Engineer at Nestlé Canada — enterprise Microsoft Teams Rooms deployments" },
   { year: "2017", event: "Extron XTP Systems Technician & AMX Networked AV technician certifications" },
   { year: "2018", event: "AI Intelligent Services formally founded" },
@@ -310,11 +312,18 @@ export default function AboutPage() {
               <br />
               every claim.
             </h2>
+            <p className="text-warm-gray text-base leading-relaxed mb-5">
+              More than two dozen manufacturer-level certifications across control,
+              lighting, audio, DSP, conferencing, networking, and AI — earned
+              directly from the companies that build these platforms, from Crestron
+              and RTI to Q-SYS, Lutron, Biamp, Extron, and Microsoft.
+            </p>
             <p className="text-warm-gray text-base leading-relaxed">
-              Manufacturer-level certification across control, audio, DSP,
-              conferencing, networking, and AI — earned directly from the people
-              who build these platforms. Every system we deploy is engineered by a
-              certified specialist, never resold by a middleman.
+              That breadth is the difference. The same engineer who programs your
+              Crestron and Lutron scenes also commissions your Q-SYS DSP, certifies
+              your Microsoft Teams Rooms, and terminates the fiber backbone they all
+              run on — so nothing is sub-contracted, nothing is lost in translation,
+              and every layer is accountable to one certified specialist.
             </p>
           </div>
 

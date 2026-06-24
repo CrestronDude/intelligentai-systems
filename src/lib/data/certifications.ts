@@ -17,10 +17,19 @@ export const certificationGroups: CertGroup[] = [
     items: [
       { name: "Core System Programming (CTI-P201)", issuer: "Crestron" },
       { name: "Essentials of Crestron Programming", issuer: "Crestron" },
-      { name: "Lighting Control Systems Programming", issuer: "Crestron" },
       { name: "Intro to Crestron Programming", issuer: "Crestron" },
+      { name: "Master Programmer", issuer: "RTI" },
       { name: "Technician — Networked AV", issuer: "AMX" },
       { name: "Certified XTP Systems Technician", issuer: "Extron" },
+    ],
+  },
+  {
+    category: "Lighting & Shading",
+    items: [
+      { name: "Lighting Control Systems Programming", issuer: "Crestron" },
+      { name: "RadioRA 3 Control", issuer: "Lutron" },
+      { name: "Ketra Tunable Lighting", issuer: "Lutron" },
+      { name: "Authorized Dealer & Programmer", issuer: "Lutron" },
     ],
   },
   {
