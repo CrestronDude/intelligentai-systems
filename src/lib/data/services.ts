@@ -144,7 +144,7 @@ export const corporateAVServices: Service[] = [
       "Centralized administrator control interface",
     ],
     systems: ["Crestron NVX", "Q-SYS Core 510", "AMX Enova", "Bose Professional", "Dante Network", "Samsung Commercial"],
-    image: "https://images.unsplash.com/photo-1531973576160-7125cd663d86?w=1200&q=80&fit=crop",
+    image: "/images/corporate-av.jpg",
   },
   {
     id: "digital-signage",
