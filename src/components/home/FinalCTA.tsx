@@ -65,10 +65,10 @@ export default function FinalCTA() {
                 Email
               </span>
               <a
-                href="mailto:admin@intelligentai.systems"
+                href="mailto:admin@intelligentai.services"
                 className="text-sm text-cream hover:text-gold transition-colors duration-300"
               >
-                admin@intelligentai.systems
+                admin@intelligentai.services
               </a>
             </div>
             <div className="w-px h-8 bg-charcoal-500" />

@@ -13,7 +13,7 @@ const jsonLd = {
   image: `${SITE_URL}/opengraph-image`,
   description:
     "Premium smart home automation and corporate AV integration. Crestron, RTI, Q-SYS, Lutron, JBL CONCEAL and Sonance specialists serving the Greater Toronto Area and Canada-wide.",
-  email: "admin@intelligentai.systems",
+  email: "admin@intelligentai.services",
   telephone: "+1-647-272-3150",
   priceRange: "$$$$",
   areaServed: [

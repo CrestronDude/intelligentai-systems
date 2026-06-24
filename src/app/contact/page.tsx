@@ -306,10 +306,10 @@ export default function ContactPage() {
                     </p>
                     <div className="flex flex-col gap-2">
                       <a
-                        href="mailto:admin@intelligentai.systems?subject=Project%20Inquiry"
+                        href="mailto:admin@intelligentai.services?subject=Project%20Inquiry"
                         className="text-gold hover:text-gold-light transition-colors duration-300"
                       >
-                        admin@intelligentai.systems
+                        admin@intelligentai.services
                       </a>
                       <a
                         href="tel:+16472723150"
@@ -369,10 +369,10 @@ export default function ContactPage() {
                         Email
                       </span>
                       <a
-                        href="mailto:admin@intelligentai.systems"
+                        href="mailto:admin@intelligentai.services"
                         className="text-sm text-cream-muted hover:text-cream transition-colors duration-300"
                       >
-                        admin@intelligentai.systems
+                        admin@intelligentai.services
                       </a>
                     </div>
                     <div>
