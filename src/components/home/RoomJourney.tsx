@@ -353,6 +353,31 @@ export default function RoomJourney() {
         {/* Floor Plan SVG */}
         <FloorPlan activeRoom={activeRoom} />
 
+        {/* Live lighting-scene caption (Living Room) — kept mounted so its
+            animation timeline stays in sync with the .scene-cycle overlay. */}
+        <div
+          className="absolute bottom-24 left-0 right-0 z-30 pointer-events-none transition-opacity duration-700"
+          style={{ opacity: activeRoom === 0 ? 1 : 0 }}
+          aria-hidden={activeRoom !== 0}
+        >
+          <div className="container-luxury">
+            <div className="inline-flex items-center gap-3 glass border border-gold/20 px-4 py-2.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-gold" />
+              <span className="text-[0.55rem] text-warm-gray tracking-[0.25em] uppercase">
+                Lighting Scene
+              </span>
+              <span className="w-px h-3 bg-charcoal-500" />
+              <span className="relative inline-block min-w-[6.5rem] h-[1rem] text-sm text-gold font-display leading-none">
+                <span className="scene-name scene-name-day">Daylight</span>
+                <span className="scene-name scene-name-evening">Evening</span>
+                <span className="scene-name scene-name-focus">Focus</span>
+                <span className="scene-name scene-name-cinema">Cinema</span>
+                <span className="scene-name scene-name-party">Entertain</span>
+              </span>
+            </div>
+          </div>
+        </div>
+
         {/* Bottom room name bar */}
         <div className="absolute bottom-0 left-0 right-0 z-30">
           <div className="container-luxury pb-8">

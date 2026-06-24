@@ -358,6 +358,47 @@ body {
   pointer-events: none;
 }
 
+/* Scene-name caption — each name fades in during its lighting window. All share
+   the 22s timeline (and start at load) so they stay synced with .scene-cycle. */
+.scene-name {
+  position: absolute;
+  left: 0;
+  top: 0;
+  white-space: nowrap;
+  opacity: 0;
+}
+.scene-name-day { animation: nameDay 22s ease-in-out infinite; }
+.scene-name-evening { animation: nameEvening 22s ease-in-out infinite; }
+.scene-name-focus { animation: nameFocus 22s ease-in-out infinite; }
+.scene-name-cinema { animation: nameCinema 22s ease-in-out infinite; }
+.scene-name-party { animation: nameParty 22s ease-in-out infinite; }
+
+@keyframes nameDay {
+  0%, 8% { opacity: 1; }
+  12%, 90% { opacity: 0; }
+  94%, 100% { opacity: 1; }
+}
+@keyframes nameEvening {
+  0%, 12% { opacity: 0; }
+  15%, 28% { opacity: 1; }
+  31%, 100% { opacity: 0; }
+}
+@keyframes nameFocus {
+  0%, 32% { opacity: 0; }
+  35%, 48% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+@keyframes nameCinema {
+  0%, 52% { opacity: 0; }
+  55%, 68% { opacity: 1; }
+  71%, 100% { opacity: 0; }
+}
+@keyframes nameParty {
+  0%, 72% { opacity: 0; }
+  75%, 88% { opacity: 1; }
+  91%, 100% { opacity: 0; }
+}
+
 /* ─── Room Journey ────────────────────────────────────────────── */
 .room-image-active {
   animation: kenBurns 20s ease-in-out infinite;
