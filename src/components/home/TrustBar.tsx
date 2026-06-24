@@ -7,6 +7,8 @@ const brands = [
   { name: "RTI", role: "Certified Programmer" },
   { name: "Q-SYS", role: "Design Partner" },
   { name: "Microsoft Teams", role: "Certified Engineer" },
+  { name: "Zoom", role: "Certified Rooms" },
+  { name: "Extron", role: "Certified Technician" },
   { name: "Lutron", role: "Authorized Dealer" },
   { name: "JBL", role: "Authorized Dealer" },
   { name: "Denon", role: "Authorized Dealer" },

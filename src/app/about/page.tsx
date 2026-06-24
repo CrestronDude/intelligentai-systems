@@ -2,21 +2,24 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import CahoniLink from "@/components/ui/CahoniLink";
+import { certificationGroups, affiliations } from "@/lib/data/certifications";
 
 export const metadata: Metadata = {
   title: "About",
   description:
-    "Design Engineer at Telus Canada and Meeting Room Technology / Microsoft Teams Engineer at Nestlé Canada. Crestron, RTI, Q-SYS, AMX, and Microsoft Teams Rooms certified — serving Toronto and across Canada with AI Intelligent Services.",
+    "Design Engineer at Telus Canada and Microsoft Teams Engineer at Nestlé Canada. Crestron, Q-SYS, AMX, Extron, Biamp, and Microsoft 365 Collaboration Communications (Teams) certified — serving Toronto and across Canada with AI Intelligent Services.",
 };
 
 const milestones: { year: string; event: React.ReactNode }[] = [
   { year: "2009", event: "First Crestron programming certification — residential automation specialist" },
   { year: "2011", event: "Design Engineer role at Telus Canada, Toronto — enterprise-scale AV & structured cabling" },
   { year: "2013", event: "Q-SYS commercial audio/video certification — corporate AV integration" },
-  { year: "2015", event: "RTI Master Programmer certification achieved" },
   { year: "2016", event: "Meeting Room Technology / Microsoft Teams Engineer at Nestlé Canada — enterprise Microsoft Teams Rooms deployments" },
+  { year: "2017", event: "Extron XTP Systems Technician & AMX Networked AV technician certifications" },
   { year: "2018", event: "AI Intelligent Services formally founded" },
+  { year: "2019", event: "Biamp TesiraFORTÉ DSP certification" },
   { year: "2020", event: "Corporate AV expansion — Crestron, AMX, and Q-SYS enterprise clients" },
+  { year: "2023", event: "Microsoft 365 Certified: Collaboration Communications Systems Engineer (Teams)" },
   {
     year: "2022",
     event: (
@@ -296,46 +299,63 @@ export default function AboutPage() {
       </section>
 
       {/* Certifications */}
-      <section className="section-padding-sm bg-charcoal-700">
+      <section className="section-padding bg-charcoal-700">
         <div className="container-luxury">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-8" data-reveal>
-            <div className="max-w-md">
-              <span className="text-label text-gold block mb-3">
-                Certified & Authorized
+          <div className="max-w-2xl mb-14" data-reveal>
+            <span className="text-label text-gold block mb-4">
+              Certifications & Training
+            </span>
+            <h2 className="text-display-md text-cream mb-6">
+              Credentials that back
+              <br />
+              every claim.
+            </h2>
+            <p className="text-warm-gray text-base leading-relaxed">
+              Manufacturer-level certification across control, audio, DSP,
+              conferencing, networking, and AI — earned directly from the people
+              who build these platforms. Every system we deploy is engineered by a
+              certified specialist, never resold by a middleman.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-charcoal-500">
+            {certificationGroups.map((group, gi) => (
+              <div
+                key={group.category}
+                data-reveal
+                data-reveal-delay={gi * 90}
+                className="bg-charcoal-700 p-8 md:p-9"
+              >
+                <div className="w-6 h-px bg-gold mb-5" />
+                <h3 className="font-display text-xl text-cream font-light mb-6 leading-snug">
+                  {group.category}
+                </h3>
+                <ul className="flex flex-col gap-4">
+                  {group.items.map((c) => (
+                    <li key={c.name} className="flex flex-col">
+                      <span className="text-sm text-cream-muted leading-snug">
+                        {c.name}
+                      </span>
+                      <span className="text-[0.55rem] text-gold uppercase tracking-[0.18em] mt-1">
+                        {c.issuer}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+
+          {/* Affiliations & background */}
+          <div className="mt-12 flex flex-wrap gap-3" data-reveal>
+            {affiliations.map((a) => (
+              <span
+                key={a}
+                className="text-label text-gold border border-gold/30 px-4 py-2 text-[0.65rem]"
+              >
+                {a}
               </span>
-              <p className="text-cream text-lg font-light mb-3">
-                Manufacturer-level certifications across control, audio,
-                conferencing, and lighting — the platforms that power the
-                world&apos;s finest homes and boardrooms.
-              </p>
-              <p className="text-warm-gray text-sm leading-relaxed">
-                From Crestron, RTI, and AMX control systems to Q-SYS DSP,
-                Microsoft Teams Rooms conferencing, and Lutron lighting, every
-                system we deploy is engineered by a certified specialist — never
-                resold by a middleman.
-              </p>
-            </div>
-            <div className="flex flex-wrap gap-3">
-              {[
-                "Crestron Certified",
-                "RTI Master Programmer",
-                "Q-SYS Design Partner",
-                "AMX Certified",
-                "Microsoft Teams Rooms",
-                "Microsoft Teams Engineer",
-                "Lutron Authorized",
-                "CEDIA Member",
-                "Telus Canada Alumnus",
-                "Nestlé Canada — Meeting Room Tech",
-              ].map((cert) => (
-                <span
-                  key={cert}
-                  className="text-label text-gold border border-gold/30 px-4 py-2 text-[0.65rem]"
-                >
-                  {cert}
-                </span>
-              ))}
-            </div>
+            ))}
           </div>
         </div>
       </section>
