@@ -113,7 +113,7 @@ export default function Hero() {
           alt="Luxury smart home living room"
           fill
           priority
-          className="object-cover object-center"
+          className="object-cover object-center hero-img-settle"
           sizes="100vw"
         />
       </div>

@@ -325,6 +325,16 @@ body {
   100% { transform: translateY(350%); opacity: 0; }
 }
 
+@keyframes heroSettle {
+  from { transform: scale(1.16); }
+  to { transform: scale(1); }
+}
+
+/* Slow zoom-out settle on the hero background as the page loads. */
+.hero-img-settle {
+  animation: heroSettle 3.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
 @keyframes kenBurns {
   0% { transform: scale(1.05) translateX(0) translateY(0); }
   50% { transform: scale(1.1) translateX(-1%) translateY(-0.5%); }
