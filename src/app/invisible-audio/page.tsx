@@ -27,8 +27,7 @@ const rooms: Space[] = [
     title: "Cinema,",
     titleAccent: "unseen",
     body: "The flagship C86 delivers reference LCR performance from behind the wall, while the C82W invisible subwoofer brings deep, tactile bass — a complete Dolby Atmos foundation with not a single speaker grille in sight.",
-    image:
-      "https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?w=1920&q=85&fit=crop",
+    image: "/images/home-theater.jpg",
     imageAlt: "Luxury home theater with invisible architectural audio",
     features: [
       "Reference LCR from the flagship C86",

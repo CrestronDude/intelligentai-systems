@@ -39,7 +39,7 @@ const cards: {
     description:
       "Purpose-built home theaters and whole-home audio systems. Invisible speakers, calibrated acoustics, and extraordinary sound.",
     href: "/services#home-theater",
-    image: "https://images.unsplash.com/photo-1574267432553-4b4628081c31?w=600&q=80&fit=crop",
+    image: "/images/home-theater.jpg",
   },
   {
     number: "04",

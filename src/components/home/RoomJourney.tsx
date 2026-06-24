@@ -35,7 +35,7 @@ const rooms = [
       "Acoustic treatment & room calibration",
     ],
     equipment: ["RTI XP-8", "JVC DLA-NZ9", "Polk Audio Legend L800"],
-    image: "https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?w=1920&q=90&fit=crop",
+    image: "/images/home-theater.jpg",
     svgPath: "M20,120 L180,120 L180,200 L20,200 Z",
     svgPerimeter: 480,
   },
