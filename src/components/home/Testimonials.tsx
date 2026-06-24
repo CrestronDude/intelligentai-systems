@@ -41,7 +41,7 @@ export default function Testimonials() {
   return (
     <section className="section-padding bg-charcoal-800" aria-labelledby="testimonials-heading">
       <div className="container-luxury">
-        <div className="mb-16 max-w-xl">
+        <div className="mb-16 max-w-xl" data-reveal>
           <span className="text-label text-gold block mb-4">Client Voices</span>
           <h2 id="testimonials-heading" className="text-display-md text-cream">
             Trusted in the homes and boardrooms that demand the most.
@@ -52,6 +52,8 @@ export default function Testimonials() {
           {testimonials.map((t, i) => (
             <figure
               key={i}
+              data-reveal
+              data-reveal-delay={i * 120}
               className="card-gradient border border-charcoal-500 p-8 md:p-10 flex flex-col"
             >
               <Stars />

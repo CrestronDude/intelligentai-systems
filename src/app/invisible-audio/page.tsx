@@ -119,7 +119,7 @@ export default function InvisibleAudioPage() {
       {/* Series intro */}
       <section className="section-padding bg-charcoal">
         <div className="container-luxury">
-          <div className="max-w-3xl mb-16 animate-fade-up">
+          <div className="max-w-3xl mb-16" data-reveal>
             <span className="text-label text-gold block mb-4">The CONCEAL Series</span>
             <h2 className="text-display-md text-cream mb-6">
               Engineered to vanish. Tuned to perform.
@@ -136,10 +136,12 @@ export default function InvisibleAudioPage() {
 
           {/* Speaker grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-1">
-            {concealSpeakers.map((s) => (
+            {concealSpeakers.map((s, i) => (
               <div
                 key={s.id}
                 id={s.id}
+                data-reveal
+                data-reveal-delay={(i % 2) * 120}
                 className="card-gradient border border-charcoal-500 p-8 md:p-10 flex flex-col group"
               >
                 {/* Image */}
@@ -211,7 +213,7 @@ export default function InvisibleAudioPage() {
         <div className="container-luxury">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             {/* Image */}
-            <div className="relative aspect-[3/2] overflow-hidden card-gradient border border-charcoal-500 order-2 lg:order-1">
+            <div className="relative aspect-[3/2] overflow-hidden card-gradient border border-charcoal-500 order-2 lg:order-1" data-reveal="left">
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(201,169,110,0.08),transparent_70%)]" />
               <Image
                 src={daSeries.image}
@@ -223,7 +225,7 @@ export default function InvisibleAudioPage() {
             </div>
 
             {/* Content */}
-            <div className="order-1 lg:order-2">
+            <div className="order-1 lg:order-2" data-reveal="right">
               <span className="text-label text-gold block mb-4">
                 Amplification · JBL DA Series
               </span>
@@ -275,7 +277,7 @@ export default function InvisibleAudioPage() {
 
       {/* CTA */}
       <section className="section-padding-sm bg-gold">
-        <div className="container-luxury text-center">
+        <div className="container-luxury text-center" data-reveal>
           <h2 className="font-display text-4xl text-charcoal font-light mb-4">
             Hear what invisible sounds like.
           </h2>

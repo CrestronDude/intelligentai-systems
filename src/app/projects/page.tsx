@@ -78,7 +78,7 @@ export default function ProjectsPage() {
       <section className="section-padding bg-charcoal border-t border-charcoal-500">
         <div className="container-luxury">
           {/* Section heading */}
-          <div className="max-w-xl mb-12">
+          <div className="max-w-xl mb-12" data-reveal>
             <span className="text-label text-gold block mb-4">The Full Portfolio</span>
             <h2 className="text-display-md text-cream">
               Browse every case study.
@@ -109,6 +109,7 @@ export default function ProjectsPage() {
               <div
                 key={project.id}
                 id={project.id}
+                data-reveal
                 className="group cursor-pointer"
                 onClick={() => { setSelectedProject(project.id); setActiveImage(0); }}
               >

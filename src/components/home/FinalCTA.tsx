@@ -18,7 +18,7 @@ export default function FinalCTA() {
 
       {/* Content */}
       <div className="relative z-10 container-luxury py-24 w-full">
-        <div className="max-w-3xl">
+        <div className="max-w-3xl" data-reveal>
           <span className="text-label text-gold block mb-6">
             Ready to Begin?
           </span>

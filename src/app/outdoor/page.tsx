@@ -124,7 +124,7 @@ export default function OutdoorPage() {
       {/* Systems recap */}
       <section className="section-padding bg-charcoal border-t border-charcoal-500">
         <div className="container-luxury">
-          <div className="max-w-2xl mb-14">
+          <div className="max-w-2xl mb-14" data-reveal>
             <span className="text-label text-gold block mb-4">Beyond the Walls</span>
             <h2 className="text-display-md text-cream mb-6">
               Every outdoor system, engineered as one.
@@ -138,8 +138,8 @@ export default function OutdoorPage() {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-charcoal-500">
-            {systemsRecap.map((s) => (
-              <div key={s.label} className="bg-charcoal px-7 py-9">
+            {systemsRecap.map((s, i) => (
+              <div key={s.label} data-reveal data-reveal-delay={i * 110} className="bg-charcoal px-7 py-9">
                 <span className="block w-8 h-px bg-gold mb-5" />
                 <h3 className="font-display text-xl text-cream font-light mb-4 leading-snug">
                   {s.label}
@@ -162,7 +162,7 @@ export default function OutdoorPage() {
 
       {/* CTA */}
       <section className="section-padding-sm bg-gold">
-        <div className="container-luxury text-center">
+        <div className="container-luxury text-center" data-reveal>
           <h2 className="font-display text-4xl text-charcoal font-light mb-4">
             Bring it all outdoors.
           </h2>

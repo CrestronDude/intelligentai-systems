@@ -30,8 +30,8 @@ export default function Assurance() {
           Why our clients trust us
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-charcoal-500">
-          {assurances.map((a) => (
-            <div key={a.title} className="bg-charcoal px-7 py-9">
+          {assurances.map((a, i) => (
+            <div key={a.title} data-reveal data-reveal-delay={i * 110} className="bg-charcoal px-7 py-9">
               <span className="block w-8 h-px bg-gold mb-5" />
               <h3 className="font-display text-xl text-cream font-light mb-3 leading-snug">
                 {a.title}

@@ -149,7 +149,7 @@ export default function ContactPage() {
         <div className="container-luxury">
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-16">
             {/* Form */}
-            <div className="lg:col-span-3">
+            <div className="lg:col-span-3" data-reveal>
               <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-6">
                 {/* Honeypot — hidden from humans, irresistible to bots. Do not remove. */}
                 <input
@@ -356,7 +356,7 @@ export default function ContactPage() {
             </div>
 
             {/* Info Panel */}
-            <div className="lg:col-span-2">
+            <div className="lg:col-span-2" data-reveal="right" data-reveal-delay={120}>
               <div className="sticky top-32">
                 {/* Contact Details */}
                 <div className="mb-10">

@@ -56,7 +56,7 @@ export default function FAQ() {
       <div className="container-luxury">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16">
           {/* Heading */}
-          <div className="lg:col-span-1">
+          <div className="lg:col-span-1" data-reveal>
             <span className="text-label text-gold block mb-4">FAQ</span>
             <h2 id="faq-heading" className="text-display-md text-cream mb-6">
               Questions, answered.
@@ -68,7 +68,7 @@ export default function FAQ() {
           </div>
 
           {/* Accordion */}
-          <div className="lg:col-span-2">
+          <div className="lg:col-span-2" data-reveal data-reveal-delay={120}>
             <dl className="border-t border-charcoal-500">
               {faqs.map((f, i) => {
                 const isOpen = open === i;

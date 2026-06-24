@@ -5,6 +5,7 @@ import Navigation from "@/components/layout/Navigation";
 import Footer from "@/components/layout/Footer";
 import JsonLd from "@/components/seo/JsonLd";
 import SmoothScroll from "@/components/shared/SmoothScroll";
+import ScrollReveal from "@/components/shared/ScrollReveal";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
@@ -87,6 +88,7 @@ export default function RootLayout({
     >
       <body className="antialiased">
         <SmoothScroll />
+        <ScrollReveal />
         <JsonLd />
         <a href="#main" className="skip-link">
           Skip to content

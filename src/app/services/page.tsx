@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 function ServiceCard({ service }: { service: (typeof homeAutomationServices)[0] }) {
   return (
-    <div className="group" id={service.id}>
+    <div className="group" id={service.id} data-reveal>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 items-stretch">
         {/* Image */}
         <div className="relative h-72 lg:h-auto overflow-hidden">
@@ -98,7 +98,7 @@ export default function ServicesPage() {
 
       {/* Home Automation Section */}
       <section id="home-automation" className="section-padding bg-charcoal">
-        <div className="container-luxury mb-16">
+        <div className="container-luxury mb-16" data-reveal>
           <span className="text-label text-gold block mb-4">Residential</span>
           <h2 className="text-display-md text-cream max-w-xl">
             Smart Home Automation
@@ -113,7 +113,7 @@ export default function ServicesPage() {
 
       {/* Corporate AV Section */}
       <section id="corporate-av" className="section-padding bg-charcoal-800">
-        <div className="container-luxury mb-16">
+        <div className="container-luxury mb-16" data-reveal>
           <span className="text-label text-gold block mb-4">Commercial</span>
           <h2 className="text-display-md text-cream max-w-xl">
             Corporate AV Integration
@@ -132,7 +132,7 @@ export default function ServicesPage() {
       <section id="ai-tools" className="section-padding bg-charcoal">
         <div className="container-luxury">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div>
+            <div data-reveal>
               <span className="text-label text-gold block mb-4">
                 AI-Enhanced Integration
               </span>
@@ -163,7 +163,7 @@ export default function ServicesPage() {
                 ))}
               </ul>
             </div>
-            <div className="relative aspect-square overflow-hidden">
+            <div className="relative aspect-square overflow-hidden" data-reveal="right" data-reveal-delay={120}>
               <Image
                 src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80&fit=crop"
                 alt="AI smart home control"
@@ -179,7 +179,7 @@ export default function ServicesPage() {
 
       {/* CTA */}
       <section className="section-padding-sm bg-gold">
-        <div className="container-luxury text-center">
+        <div className="container-luxury text-center" data-reveal>
           <h2 className="font-display text-4xl text-charcoal font-light mb-4">
             Ready to discuss your project?
           </h2>
