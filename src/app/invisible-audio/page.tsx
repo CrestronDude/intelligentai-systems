@@ -85,7 +85,7 @@ export default function InvisibleAudioPage() {
             alt="Luxury living room with no visible speakers"
             fill
             priority
-            className="object-cover object-center"
+            className="object-cover object-center hero-img-settle"
             sizes="100vw"
           />
           <div className="absolute inset-0 hero-gradient" />

@@ -81,7 +81,7 @@ export default function ServicesPage() {
             alt="Luxury smart home interior"
             fill
             priority
-            className="object-cover object-center"
+            className="object-cover object-center hero-img-settle"
             sizes="100vw"
           />
           <div className="absolute inset-0 bg-charcoal/70" />

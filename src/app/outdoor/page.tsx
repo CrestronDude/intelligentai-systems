@@ -94,7 +94,7 @@ export default function OutdoorPage() {
             alt="Luxury pool and terrace at sunset"
             fill
             priority
-            className="object-cover object-center"
+            className="object-cover object-center hero-img-settle"
             sizes="100vw"
           />
           <div className="absolute inset-0 hero-gradient" />

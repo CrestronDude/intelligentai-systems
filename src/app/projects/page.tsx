@@ -47,7 +47,7 @@ export default function ProjectsPage() {
             alt="The Bridal Path Estate"
             fill
             priority
-            className="object-cover object-center"
+            className="object-cover object-center hero-img-settle"
             sizes="100vw"
           />
           <div className="absolute inset-0 bg-charcoal/65" />
