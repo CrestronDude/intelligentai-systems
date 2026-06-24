@@ -90,7 +90,7 @@ export const projects: Project[] = [
       "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200&q=85&fit=crop",
     interiorImages: [
       "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=1200&q=85&fit=crop",
-      "https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&q=85&fit=crop",
+      "https://images.unsplash.com/photo-1556912173-3bb406ef7e77?w=1200&q=85&fit=crop",
       "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=1200&q=85&fit=crop",
     ],
     tagline: "Rosedale heritage reimagined with invisible technology",
@@ -204,7 +204,7 @@ export const projects: Project[] = [
       "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1200&q=85&fit=crop",
     interiorImages: [
       "https://images.unsplash.com/photo-1444653614773-995cb1ef9efa?w=1200&q=85&fit=crop",
-      "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=1200&q=85&fit=crop",
+      "https://images.unsplash.com/photo-1531973576160-7125cd663d86?w=1200&q=85&fit=crop",
       "https://images.unsplash.com/photo-1543269865-cbf427effbad?w=1200&q=85&fit=crop",
     ],
     tagline: "Waterfront executive AV — precision at every level",

@@ -59,7 +59,7 @@ export default function AIToolsSection() {
 
       <div className="container-luxury relative z-10">
         {/* Header */}
-        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 mb-16">
+        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 mb-16" data-reveal>
           <div className="max-w-xl">
             <span className="text-label text-gold block mb-4">AI-Enhanced</span>
             <h2 className="text-display-lg text-cream">
@@ -79,6 +79,8 @@ export default function AIToolsSection() {
           {tools.map((tool, i) => (
             <div
               key={i}
+              data-reveal
+              data-reveal-delay={i * 120}
               className="glass-light border border-charcoal-500 hover:border-gold/30 p-8 md:p-10 transition-all duration-500 group"
             >
               {/* Status Pill */}

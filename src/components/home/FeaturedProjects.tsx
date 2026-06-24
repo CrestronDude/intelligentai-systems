@@ -40,7 +40,7 @@ export default function FeaturedProjects() {
 
   return (
     <section className="section-padding bg-charcoal-800">
-      <div className="container-luxury mb-12">
+      <div className="container-luxury mb-12" data-reveal>
         <div className="flex items-end justify-between">
           <div>
             <span className="text-label text-gold block mb-4">Canadian Case Studies</span>
