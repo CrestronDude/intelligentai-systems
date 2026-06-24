@@ -1,36 +1,38 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# AI Intelligent Services — intelligentai.systems
 
-## Getting Started
+Luxury marketing site for **AI Intelligent Services** — premium smart-home automation and corporate AV integration (and an Authorized JBL Dealer) serving the Greater Toronto Area and Canada-wide.
 
-First, run the development server:
+Built to feel expensive, cinematic, and trustworthy: dark charcoal + brushed gold, Cormorant Garamond display type, global smooth scrolling, and continuous scroll-driven "walk through the spaces" motion.
+
+## Stack
+
+- **Next.js 16** (App Router) + **TypeScript**
+- **Tailwind CSS v4** (config lives in `src/app/globals.css` `@theme`, not `tailwind.config.ts`)
+- **Lenis** smooth scrolling · custom rAF scroll-scrub walkthroughs · global `data-reveal` engine
+- **react-hook-form** + **zod** contact form → **Brevo** transactional email, protected by Vercel **BotID**
+- Deployed on **Vercel** (auto-deploys on push to `main`)
+
+## Develop
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev      # http://localhost:3000
+npm run build    # production build — run before committing
+npm run lint     # ESLint
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Pages
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+`/` home · `/services` · `/invisible-audio` (JBL CONCEAL + DA amps) · `/outdoor` (Outdoor Living) · `/projects` (case studies) · `/about` (story + certifications) · `/contact`
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Documentation
 
-## Learn More
+- **`CLAUDE.md`** — maintenance guide; read first. Covers the file map, the Motion & UI system, common tasks, and the live contact form.
+- **`design.md`** — authoritative design + motion system (colors, type, components, the signature scroll motion, SEO, accessibility).
+- **`project-structure.md`** — full file tree, dependencies, and color tokens.
 
-To learn more about Next.js, take a look at the following resources:
+## Notes
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Contact email everywhere is **`admin@intelligentai.services`** (`.services`).
+- The contact API needs **`BREVO_API_KEY`** set in Vercel (production).
+- Brand/product imagery is hosted locally in `public/images/`.

@@ -22,8 +22,8 @@
 | Cream           | `#F5F0E8` | Primary text on dark backgrounds         |
 | Cream Dark      | `#EAE3D6` | Secondary text                           |
 | Cream Muted     | `#D4C9B8` | Tertiary text, placeholders              |
-| Warm Gray       | `#7A7670` | Body text, meta information              |
-| Warm Gray Light | `#A09C96` | Disabled states, secondary meta          |
+| Warm Gray       | `#948D85` | Body text, meta info (lightened from #7A7670 for WCAG AA) |
+| Warm Gray Light | `#B0AAA2` | Disabled states, secondary meta          |
 
 ### Color Rules
 - **Never use pure white (#FFF) or pure black (#000)** — use Cream and Charcoal instead.
@@ -134,18 +134,35 @@ All service/project cards use:
 
 ---
 
+## Signature Motion System (the soul of the site — preserve it)
+
+The site reads as cinematic and "alive." Approved approach is **continuous, scroll-linked motion**. Rejected (do not reintroduce): discrete index-flip transitions, and stepped/auto-advance walkthroughs. Everything below honors `prefers-reduced-motion`.
+
+### 1. Global smooth scrolling (Lenis)
+`components/shared/SmoothScroll.tsx` runs Lenis (eased momentum, `duration ≈ 1.15`), mounted in the root layout. All other motion rides on this. Required CSS: the `html.lenis…` rules in `globals.css`. Native touch momentum is kept on mobile.
+
+### 2. Scroll-scrub walkthroughs
+`SpaceWalkthrough.tsx` (reusable; `/invisible-audio`, `/outdoor`, `/projects`) and `RoomJourney.tsx` (homepage) pin a full-screen viewport and **cross-dissolve + scale + parallax between spaces continuously with scroll** — no hard flips. Implementation: a per-frame imperative rAF loop eases a continuous progress value `t ∈ [0, N-1]` (`EASE ≈ 0.085`) and writes each layer's opacity/transform via refs (no React re-render per frame). `VH_PER_SPACE ≈ 115vh` of scroll travel per space. The active image keeps a slow ken-burns drift (`.room-image-active`).
+
+### 3. Global scroll-reveal
+`ScrollReveal.tsx` reveals any `data-reveal` element as it enters view (IntersectionObserver + MutationObserver for route changes). Options: `data-reveal="up|left|right|scale"`, `data-reveal-delay="120"` (ms stagger). CSS under `.reveal-on [data-reveal]`. **Progressive enhancement**: hidden state is gated by the `reveal-on` class added before first paint by an inline script in `layout.tsx` (no load flash; content visible without JS). Put `data-reveal` on every new section/card.
+
+### 4. Hero load-in
+Every page hero image uses `.hero-img-settle` (slow 3.4s scale 1.16→1.0 settle). The homepage `Hero` additionally staggers its text via `animate-fade-up` with inline `animationDuration: 1.3s` and increasing delays (0.2s → 1.7s). Pure CSS → runs on mobile.
+
+### 5. Living Room lighting demo (RoomJourney slide 01)
+Demonstrates one-touch scene control: `.scene-cycle` (soft-light overlay) tints the room through **Daylight → Evening → Focus → Cinema → Entertain** on a 22s loop; a synced caption (`.scene-name-*`) and the floor-plan glow dot (`.scene-dot`) change with it. All three share the same 22s timeline from load and are opacity-gated to the active slide so they stay in lockstep.
+
 ## Animation & Interaction Guidelines
 
 ### Entrance Animations
-- **FadeUp**: Default entrance for most elements (`animate-fade-up`)
-- **FadeIn**: Images and full-section reveals
-- **SlideInLeft**: Left-to-right reveals for sidebars and content panels
-- Delay stagger: Use `.animation-delay-100` through `.animation-delay-800` (100ms steps)
+- **Preferred**: `data-reveal` (global engine) for sections/cards.
+- Legacy classes still available: `animate-fade-up` / `-in` / `-slide-left` / `-scale-up`, with `.animation-delay-100`–`800`.
 
 ### Scroll Interactions
-- **Parallax Hero**: Image scrolls at 35% of scroll speed (`translateY(scroll * 0.35)`)
-- **IntersectionObserver**: All sections use IO with `threshold: 0.1` for entrance triggers
-- **Trust Bar**: Animated horizontal scroll at 0.3px/frame via RAF
+- **Parallax Hero**: background scrolls at ~30% of scroll speed (the wrapper's `translateY`; the image itself runs the settle + ken-burns).
+- **Walkthroughs**: continuous scroll-scrub (see Signature Motion System).
+- **Trust Bar**: RAF horizontal marquee at ~0.3px/frame.
 
 ### Tilt Effect (Service Cards)
 ```javascript
@@ -197,12 +214,19 @@ All service/project cards use:
 
 ### Next.js Image Config
 ```typescript
-// next.config.ts
-remotePatterns: [
-  { protocol: "https", hostname: "images.unsplash.com" },
-  { protocol: "https", hostname: "plus.unsplash.com" },
-]
+// next.config.ts (wrapped in withBotId)
+images: {
+  formats: ["image/avif", "image/webp"],
+  remotePatterns: [
+    { protocol: "https", hostname: "images.unsplash.com" },
+    { protocol: "https", hostname: "plus.unsplash.com" },
+  ],
+}
 ```
+
+### Local vs. remote imagery
+- **Brand/product/room assets are hosted locally** in `public/images/` (JBL CONCEAL/DA, `home-theater.jpg`) — more reliable than hotlinking and no remotePattern needed.
+- Decorative imagery uses Unsplash. **Always download + visually verify a photo ID depicts the correct subject before using it** — many IDs are mismatched.
 
 ---
 
@@ -238,11 +262,17 @@ remotePatterns: [
 
 ## SEO Structure
 
-- All pages use Next.js `metadata` export with `title`, `description`, `openGraph`, `twitter`
-- Title template: `"Page Name | AI Intelligent Services"`
-- Each page has a unique `<h1>` using display font
-- Images have descriptive `alt` text
-- `metadataBase` set to `https://intelligentai.systems`
+- Every page exports `metadata` (`title`, `description`, `openGraph`, `twitter`). Client-component pages (`/projects`, `/contact`) carry it via a sibling `layout.tsx`.
+- Title template `"Page Name | AI Intelligent Services"`; `metadataBase` = `https://intelligentai.systems`.
+- File-based SEO: `sitemap.ts`, `robots.ts`, `manifest.ts` (PWA), `opengraph-image.tsx` (branded OG card via `next/og`), `not-found.tsx` (branded 404).
+- Structured data: `components/seo/JsonLd.tsx` (LocalBusiness/ElectronicsStore, rendered in layout) + `FAQPage` JSON-LD inside `FAQ.tsx`.
+- Each page has a unique display-font `<h1>`; all images have descriptive `alt`.
+- **Contact email shown anywhere must be `admin@intelligentai.services`** (`.services`, not `.systems`).
+
+## Accessibility
+- Global `:focus-visible` gold outline; a `.skip-link` to `#main` in the layout.
+- `prefers-reduced-motion` media query neutralizes animations (Lenis, walkthroughs, reveals, settle, lighting demo all degrade gracefully).
+- Secondary text color (`warm-gray`) is tuned for WCAG AA on charcoal.
 
 ---
 
