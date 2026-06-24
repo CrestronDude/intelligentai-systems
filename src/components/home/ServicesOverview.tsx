@@ -21,7 +21,7 @@ const cards: {
     description:
       "Every light, shade, climate zone, camera, and entertainment system under one elegant interface — custom-programmed to your lifestyle.",
     href: "/services#home-automation",
-    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80&fit=crop",
+    image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&q=80&fit=crop",
   },
   {
     number: "02",

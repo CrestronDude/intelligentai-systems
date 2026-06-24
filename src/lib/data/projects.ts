@@ -35,7 +35,7 @@ export const projects: Project[] = [
       "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=1200&q=85&fit=crop",
     interiorImages: [
       "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&q=85&fit=crop",
-      "https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?w=1200&q=85&fit=crop",
+      "https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=1200&q=85&fit=crop",
       "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1200&q=85&fit=crop",
     ],
     tagline: "17,000 sq ft of seamless Canadian excellence",
@@ -91,7 +91,7 @@ export const projects: Project[] = [
     interiorImages: [
       "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=1200&q=85&fit=crop",
       "https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&q=85&fit=crop",
-      "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&q=85&fit=crop",
+      "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=1200&q=85&fit=crop",
     ],
     tagline: "Rosedale heritage reimagined with invisible technology",
     description:

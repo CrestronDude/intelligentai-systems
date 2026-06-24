@@ -51,7 +51,7 @@ export const homeAutomationServices: Service[] = [
       "Zone control via touchscreen, keypad, or mobile",
     ],
     systems: ["Crestron NVX", "Q-SYS Core", "JBL Conceal", "Sonance Invisible", "Dante Protocol", "Bose Professional"],
-    image: "https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?w=1200&q=80&fit=crop",
+    image: "https://images.unsplash.com/photo-1601944177325-f8867652837f?w=1200&q=80&fit=crop",
   },
   {
     id: "lighting-shading",
@@ -69,7 +69,7 @@ export const homeAutomationServices: Service[] = [
       "Landscape & exterior lighting control",
     ],
     systems: ["Lutron Ketra", "Lutron Sivoia QS", "Crestron Shades", "Hunter Douglas PowerView"],
-    image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1200&q=80&fit=crop",
+    image: "https://images.unsplash.com/photo-1617104678098-de229db51175?w=1200&q=80&fit=crop",
   },
   {
     id: "home-theater",
@@ -87,7 +87,7 @@ export const homeAutomationServices: Service[] = [
       "Outdoor entertainment systems",
     ],
     systems: ["JBL Conceal", "Sonance", "Polk Audio Reserve", "Denon", "JVC Projectors", "Stewart Filmscreen"],
-    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&q=80&fit=crop",
+    image: "/images/home-theater.jpg",
   },
   {
     id: "security-wellness",
@@ -105,7 +105,7 @@ export const homeAutomationServices: Service[] = [
       "24/7 remote monitoring capability",
     ],
     systems: ["eufy Security", "Ring Pro", "Alarm.com", "Nest", "Schlage Encode"],
-    image: "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=1200&q=80&fit=crop",
+    image: "https://images.unsplash.com/photo-1557597774-9d273605dfa9?w=1200&q=80&fit=crop",
   },
 ];
 
@@ -162,7 +162,7 @@ export const corporateAVServices: Service[] = [
       "Scheduled content automation",
     ],
     systems: ["Samsung MagicInfo", "BrightSign", "LG SuperSign", "Appspace", "Scala"],
-    image: "https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=1200&q=80&fit=crop",
+    image: "/images/digital-signage.jpg",
   },
   {
     id: "auditorium-events",

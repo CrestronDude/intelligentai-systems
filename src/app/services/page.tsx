@@ -165,7 +165,7 @@ export default function ServicesPage() {
             </div>
             <div className="relative aspect-square overflow-hidden" data-reveal="right" data-reveal-delay={120}>
               <Image
-                src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80&fit=crop"
+                src="https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=800&q=80&fit=crop"
                 alt="AI smart home control"
                 fill
                 className="object-cover"
