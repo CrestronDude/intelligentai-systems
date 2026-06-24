@@ -6,7 +6,7 @@ import CahoniLink from "@/components/ui/CahoniLink";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "Design Engineer at Telus Canada. Crestron, RTI, and Q-SYS certified programmer serving Toronto and across Canada with AI Intelligent Services.",
+    "Design Engineer at Telus Canada and Meeting Room Technology / Microsoft Teams Engineer at Nestlé Canada. Crestron, RTI, Q-SYS, AMX, and Microsoft Teams Rooms certified — serving Toronto and across Canada with AI Intelligent Services.",
 };
 
 const milestones: { year: string; event: React.ReactNode }[] = [
@@ -14,6 +14,7 @@ const milestones: { year: string; event: React.ReactNode }[] = [
   { year: "2011", event: "Design Engineer role at Telus Canada, Toronto — enterprise-scale AV & structured cabling" },
   { year: "2013", event: "Q-SYS commercial audio/video certification — corporate AV integration" },
   { year: "2015", event: "RTI Master Programmer certification achieved" },
+  { year: "2016", event: "Meeting Room Technology / Microsoft Teams Engineer at Nestlé Canada — enterprise Microsoft Teams Rooms deployments" },
   { year: "2018", event: "AI Intelligent Services formally founded" },
   { year: "2020", event: "Corporate AV expansion — Crestron, AMX, and Q-SYS enterprise clients" },
   {
@@ -84,7 +85,7 @@ export default function AboutPage() {
       <section className="section-padding bg-charcoal">
         <div className="container-luxury">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
-            <div>
+            <div data-reveal>
               <span className="text-label text-gold block mb-6">Our Story</span>
               <h2 className="text-display-md text-cream mb-8">
                 15 years of mastery,
@@ -98,10 +99,21 @@ export default function AboutPage() {
                   residential and commercial AV integration in Canada and beyond.
                 </p>
                 <p>
-                  A background as Design Engineer at Telus Canada in Toronto gave us
-                  the enterprise-grade discipline that defines every project we touch —
-                  from the cabling standards in a Rosedale estate to the Q-SYS DSP
-                  architecture in a Fortune 500 boardroom.
+                  A background as Design Engineer at Telus Canada — and as Meeting
+                  Room Technology / Microsoft Teams Engineer at Nestlé Canada — gave us
+                  the enterprise-grade discipline that defines every project we touch.
+                  From the cabling standards in a Rosedale estate to Microsoft Teams
+                  Rooms and Q-SYS DSP architecture deployed across a Fortune 500 campus,
+                  the same rigor applies.
+                </p>
+                <p>
+                  Few integrators bring both worlds together: the boutique craft of
+                  luxury residential automation and the discipline of enterprise
+                  meeting-room engineering. Having engineered Microsoft Teams Rooms and
+                  AV for one of the world&apos;s largest companies — and programmed some
+                  of Canada&apos;s finest homes — we hold a single boardroom and a
+                  17,000 sq ft estate to the very same uncompromising standard. That is
+                  why discerning clients choose AI Intelligent Services.
                 </p>
                 <p>
                   Today, AI Intelligent Services delivers Crestron, RTI, Q-SYS, and AMX
@@ -118,7 +130,7 @@ export default function AboutPage() {
             </div>
 
             {/* Credentials */}
-            <div>
+            <div data-reveal="right" data-reveal-delay={120}>
               <div className="relative aspect-[4/5] mb-8 overflow-hidden">
                 <Image
                   src="https://images.unsplash.com/photo-1560179707-f14e90ef3623?w=800&q=80&fit=crop"
@@ -154,7 +166,8 @@ export default function AboutPage() {
                 <div className="w-1 self-stretch bg-gold flex-shrink-0" />
                 <div>
                   <span className="text-label text-gold text-[0.6rem] block mb-1">Career Background</span>
-                  <span className="text-cream text-sm block">Design Engineer — Telus Canada</span>
+                  <span className="text-cream text-sm block">Meeting Room Technology / Microsoft Teams Engineer — Nestlé Canada</span>
+                  <span className="text-cream text-sm block mt-1.5">Design Engineer — Telus Canada</span>
                   <span className="text-warm-gray text-xs">Toronto, Ontario</span>
                 </div>
               </div>
@@ -167,7 +180,7 @@ export default function AboutPage() {
       <section className="section-padding bg-charcoal-800">
         <div className="container-luxury">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div className="relative aspect-video overflow-hidden">
+            <div className="relative aspect-video overflow-hidden" data-reveal="left">
               <Image
                 src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1200&q=85&fit=crop"
                 alt="Cahoni AI quoting platform"
@@ -182,7 +195,7 @@ export default function AboutPage() {
                 </span>
               </div>
             </div>
-            <div>
+            <div data-reveal="right" data-reveal-delay={120}>
               <span className="text-label text-gold block mb-4">Built by Integrators</span>
               <h2 className="text-display-md text-cream mb-6">
                 <CahoniLink>Cahoni AI</CahoniLink>
@@ -222,7 +235,7 @@ export default function AboutPage() {
       {/* Values */}
       <section className="section-padding bg-charcoal">
         <div className="container-luxury">
-          <div className="max-w-xl mb-16">
+          <div className="max-w-xl mb-16" data-reveal>
             <span className="text-label text-gold block mb-4">Our Philosophy</span>
             <h2 className="text-display-md text-cream">
               The values that define
@@ -230,9 +243,11 @@ export default function AboutPage() {
             </h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-charcoal-500">
-            {values.map((v) => (
+            {values.map((v, i) => (
               <div
                 key={v.title}
+                data-reveal
+                data-reveal-delay={i * 100}
                 className="bg-charcoal p-10 md:p-12 group hover:bg-charcoal-700 transition-colors duration-300"
               >
                 <div className="w-6 h-px bg-gold mb-6 group-hover:w-10 transition-all duration-300" />
@@ -251,7 +266,7 @@ export default function AboutPage() {
       {/* Timeline */}
       <section className="section-padding bg-charcoal-800">
         <div className="container-luxury">
-          <div className="max-w-xl mb-16">
+          <div className="max-w-xl mb-16" data-reveal>
             <span className="text-label text-gold block mb-4">Our Journey</span>
             <h2 className="text-display-md text-cream">
               15 years of milestones
@@ -261,7 +276,7 @@ export default function AboutPage() {
             <div className="absolute left-[5.5rem] top-0 bottom-0 w-px bg-charcoal-500" />
             <div className="flex flex-col gap-10">
               {milestones.map((m, i) => (
-                <div key={i} className="flex items-start gap-8">
+                <div key={i} data-reveal="left" data-reveal-delay={i * 70} className="flex items-start gap-8">
                   <div className="w-20 flex-shrink-0 text-right">
                     <span className="font-display text-lg text-gold font-light">
                       {m.year}
@@ -283,13 +298,21 @@ export default function AboutPage() {
       {/* Certifications */}
       <section className="section-padding-sm bg-charcoal-700">
         <div className="container-luxury">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-8">
-            <div>
+          <div className="flex flex-col md:flex-row items-center justify-between gap-8" data-reveal>
+            <div className="max-w-md">
               <span className="text-label text-gold block mb-3">
                 Certified & Authorized
               </span>
-              <p className="text-cream text-lg font-light">
-                Active certifications with the platforms that matter most.
+              <p className="text-cream text-lg font-light mb-3">
+                Manufacturer-level certifications across control, audio,
+                conferencing, and lighting — the platforms that power the
+                world&apos;s finest homes and boardrooms.
+              </p>
+              <p className="text-warm-gray text-sm leading-relaxed">
+                From Crestron, RTI, and AMX control systems to Q-SYS DSP,
+                Microsoft Teams Rooms conferencing, and Lutron lighting, every
+                system we deploy is engineered by a certified specialist — never
+                resold by a middleman.
               </p>
             </div>
             <div className="flex flex-wrap gap-3">
@@ -298,9 +321,12 @@ export default function AboutPage() {
                 "RTI Master Programmer",
                 "Q-SYS Design Partner",
                 "AMX Certified",
+                "Microsoft Teams Rooms",
+                "Microsoft Teams Engineer",
                 "Lutron Authorized",
                 "CEDIA Member",
                 "Telus Canada Alumnus",
+                "Nestlé Canada — Meeting Room Tech",
               ].map((cert) => (
                 <span
                   key={cert}
@@ -316,7 +342,7 @@ export default function AboutPage() {
 
       {/* CTA */}
       <section className="section-padding-sm bg-charcoal">
-        <div className="container-luxury text-center">
+        <div className="container-luxury text-center" data-reveal>
           <h2 className="font-display text-4xl text-cream font-light mb-4">
             Ready to work with us?
           </h2>

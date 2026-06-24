@@ -24,6 +24,7 @@ const brands = [
   "RTI",
   "AMX",
   "Q-SYS",
+  "Microsoft Teams",
   "Lutron",
   "Shure",
   "Bose Professional",
