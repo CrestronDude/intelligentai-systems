@@ -87,6 +87,15 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="antialiased">
+        {/* Arm scroll-reveal before first paint so above-the-fold content fades
+            in on load instead of flashing visible-then-hidden. Skipped under
+            reduced-motion and if JS is disabled (content stays visible). */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "(function(){try{if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){document.documentElement.classList.add('reveal-on')}}catch(e){}})();",
+          }}
+        />
         <SmoothScroll />
         <ScrollReveal />
         <JsonLd />

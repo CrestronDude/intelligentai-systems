@@ -52,7 +52,7 @@ export default function ProjectsPage() {
           />
           <div className="absolute inset-0 bg-charcoal/65" />
         </div>
-        <div className="relative z-10 container-luxury pb-16 w-full">
+        <div className="relative z-10 container-luxury pb-16 w-full" data-reveal>
           <span className="text-label text-gold block mb-4">Our Work</span>
           <h1 className="text-display-lg text-cream mb-4">
             Residential estates.
