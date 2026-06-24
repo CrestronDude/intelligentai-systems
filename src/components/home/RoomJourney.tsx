@@ -142,6 +142,17 @@ function FloorPlan({ activeRoom }: { activeRoom: number }) {
           fill="#C9A96E"
           style={{ transition: "all 0.8s cubic-bezier(0.16,1,0.3,1)" }}
         />
+        {/* Living Room: glow dot follows the active lighting scene color */}
+        <circle
+          cx={dot.cx}
+          cy={dot.cy}
+          r="2.5"
+          className="scene-dot"
+          style={{
+            opacity: activeRoom === 0 ? 1 : 0,
+            transition: "opacity 0.6s ease",
+          }}
+        />
       </svg>
       <p className="text-[0.5rem] text-warm-gray tracking-[0.2em] uppercase text-right mt-1 opacity-40">
         Floor Plan

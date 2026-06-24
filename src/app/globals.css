@@ -399,6 +399,20 @@ body {
   91%, 100% { opacity: 0; }
 }
 
+/* Floor-plan glow dot — cycles fill through the scene colors, synced to the
+   lighting loop (same 22s timeline from load). */
+@keyframes sceneDotFill {
+  0%, 8% { fill: #c9a96e; }     /* neutral gold */
+  15%, 28% { fill: #ffb14e; }   /* warm evening */
+  35%, 48% { fill: #6aa0ff; }   /* cool daylight */
+  55%, 68% { fill: #5560c8; }   /* dim cinema */
+  75%, 88% { fill: #ff6a24; }   /* amber party */
+  94%, 100% { fill: #c9a96e; }
+}
+.scene-dot {
+  animation: sceneDotFill 22s ease-in-out infinite;
+}
+
 /* ─── Room Journey ────────────────────────────────────────────── */
 .room-image-active {
   animation: kenBurns 20s ease-in-out infinite;
