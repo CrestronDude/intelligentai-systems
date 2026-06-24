@@ -134,7 +134,10 @@ export default function Hero() {
       <div className="relative z-10 container-luxury w-full pb-28">
         <div className="max-w-3xl">
           {/* Pre-label */}
-          <div className="flex items-center gap-3 mb-8 animate-fade-up">
+          <div
+            className="flex items-center gap-3 mb-8 animate-fade-up"
+            style={{ animationDuration: "1.3s", animationDelay: "0.2s" }}
+          >
             <span className="w-8 h-px bg-gold" />
             <span className="text-label text-gold">
               Premium Smart Home &amp; Corporate AV Integration
@@ -142,7 +145,10 @@ export default function Hero() {
           </div>
 
           {/* Headline */}
-          <h1 className="animate-fade-up animation-delay-100 mb-8">
+          <h1
+            className="animate-fade-up mb-8"
+            style={{ animationDuration: "1.3s", animationDelay: "0.55s" }}
+          >
             <span className="text-display-xl text-cream block">
               Where intelligence
             </span>
@@ -152,14 +158,20 @@ export default function Hero() {
           </h1>
 
           {/* Sub */}
-          <p className="text-lg text-cream-muted leading-relaxed max-w-xl mb-12 font-light animate-fade-up animation-delay-200">
+          <p
+            className="text-lg text-cream-muted leading-relaxed max-w-xl mb-12 font-light animate-fade-up"
+            style={{ animationDuration: "1.3s", animationDelay: "0.9s" }}
+          >
             AI Intelligent Services delivers world-class Crestron, RTI, and
             Q-SYS automation to discerning homeowners and corporations who
             demand the absolute finest.
           </p>
 
           {/* CTAs */}
-          <div className="flex flex-wrap items-center gap-5 animate-fade-up animation-delay-300">
+          <div
+            className="flex flex-wrap items-center gap-5 animate-fade-up"
+            style={{ animationDuration: "1.3s", animationDelay: "1.25s" }}
+          >
             <Link
               href="/projects"
               className="btn-gold-shimmer inline-flex items-center gap-3 px-8 py-4 bg-gold text-charcoal text-label hover:bg-gold-light transition-all duration-300"
@@ -183,7 +195,10 @@ export default function Hero() {
       <ArchitecturalAccent />
 
       {/* Scroll cue */}
-      <div className="absolute bottom-8 right-1/2 translate-x-1/2 z-10 flex flex-col items-center gap-2 animate-fade-in animation-delay-800">
+      <div
+        className="absolute bottom-8 right-1/2 translate-x-1/2 z-10 flex flex-col items-center gap-2 animate-fade-in"
+        style={{ animationDuration: "1.3s", animationDelay: "1.7s" }}
+      >
         <div className="w-px h-14 bg-gradient-to-b from-transparent via-gold/60 to-gold relative overflow-hidden">
           <div
             className="absolute top-0 w-full bg-gold animate-fade-in"
