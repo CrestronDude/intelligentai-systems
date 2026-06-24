@@ -341,6 +341,23 @@ body {
   100% { transform: scale(1.05) translateX(0) translateY(0); }
 }
 
+/* ─── Lighting scene cycle (Living Room walkthrough) ──────────────
+   Tints the room image through warm / cool / dim / party lighting moods to
+   demonstrate one-touch scene control. Soft-light blend keeps it photographic. */
+@keyframes lightingScenes {
+  0%, 6%    { background-color: rgba(255, 168, 78, 0); }      /* neutral day */
+  15%, 26%  { background-color: rgba(255, 146, 52, 0.42); }   /* warm evening */
+  35%, 46%  { background-color: rgba(74, 132, 255, 0.34); }   /* cool daylight */
+  55%, 66%  { background-color: rgba(6, 9, 26, 0.62); }       /* dim cinema */
+  75%, 86%  { background-color: rgba(255, 88, 30, 0.40); }    /* amber party */
+  100%      { background-color: rgba(255, 168, 78, 0); }      /* back to neutral */
+}
+.scene-cycle {
+  mix-blend-mode: soft-light;
+  animation: lightingScenes 22s ease-in-out infinite;
+  pointer-events: none;
+}
+
 /* ─── Room Journey ────────────────────────────────────────────── */
 .room-image-active {
   animation: kenBurns 20s ease-in-out infinite;

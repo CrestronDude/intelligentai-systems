@@ -250,6 +250,8 @@ export default function RoomJourney() {
               priority={i === 0}
               loading={i === 0 ? "eager" : "lazy"}
             />
+            {/* Living Room: auto-cycle lighting scenes to demo one-touch control */}
+            {i === 0 && <div className="scene-cycle absolute inset-0" aria-hidden="true" />}
           </div>
         ))}
 
