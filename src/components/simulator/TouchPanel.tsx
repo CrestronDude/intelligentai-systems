@@ -77,7 +77,7 @@ function Chip({
 
 export default function TouchPanel({ room, state, setRoom, patch, scene }: Props) {
   return (
-    <div className="glass border border-gold/20 h-full flex flex-col overflow-hidden">
+    <div className="glass border border-gold/20 flex flex-col lg:h-full lg:overflow-hidden">
       {/* Header */}
       <div className="px-5 py-4 border-b border-charcoal-600 flex items-center justify-between">
         <div>
@@ -111,7 +111,7 @@ export default function TouchPanel({ room, state, setRoom, patch, scene }: Props
       </div>
 
       {/* Scrollable controls */}
-      <div className="flex-1 overflow-y-auto px-5 py-4" data-lenis-prevent>
+      <div className="px-5 py-4 lg:flex-1 lg:overflow-y-auto" data-lenis-prevent>
         <Section label="Scenes">
           <div className="grid grid-cols-3 gap-2">
             {SCENES.map((s) => (

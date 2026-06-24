@@ -80,9 +80,9 @@ export default function Simulator() {
   const controlProps = { room, state: active, setRoom, patch, scene };
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-[1fr_minmax(320px,380px)] gap-3 h-[78vh] min-h-[560px]">
+    <div className="grid grid-cols-1 lg:grid-cols-[1fr_minmax(320px,400px)] gap-3 lg:h-[80vh] lg:min-h-[600px]">
       {/* Environment */}
-      <div className="relative border border-charcoal-500 overflow-hidden min-h-[44vh] lg:min-h-0">
+      <div className="relative border border-charcoal-500 overflow-hidden h-[44vh] min-h-[300px] lg:h-auto lg:min-h-0">
         <RoomStage room={room} state={active} audio={audio} />
         <button
           onClick={() => dispatch({ type: "allOff" })}
@@ -93,7 +93,7 @@ export default function Simulator() {
       </div>
 
       {/* Controls */}
-      <div className="flex flex-col gap-3 min-h-0">
+      <div className="flex flex-col gap-3 lg:min-h-0">
         <div className="grid grid-cols-2 gap-1 flex-shrink-0">
           {(["touch", "remote"] as const).map((m) => (
             <button
@@ -109,7 +109,7 @@ export default function Simulator() {
             </button>
           ))}
         </div>
-        <div className="flex-1 min-h-0">
+        <div className="lg:flex-1 lg:min-h-0">
           {mode === "touch" ? (
             <TouchPanel {...controlProps} />
           ) : (

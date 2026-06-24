@@ -60,7 +60,7 @@ export default function RemoteControl({ room, state, setRoom, patch, scene }: Pr
   };
 
   return (
-    <div className="flex items-start justify-center h-full overflow-y-auto py-2" data-lenis-prevent>
+    <div className="flex items-start justify-center py-2 lg:h-full lg:overflow-y-auto" data-lenis-prevent>
       <div className="w-[260px] rounded-[2rem] bg-gradient-to-b from-charcoal-700 to-charcoal-800 border border-charcoal-500 shadow-2xl px-6 py-7 flex flex-col gap-6">
         {/* Brand + power */}
         <div className="flex items-center justify-between">
