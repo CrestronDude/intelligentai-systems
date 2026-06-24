@@ -13,6 +13,7 @@ const services = [
 ];
 
 const company = [
+  { label: "Smart Home Simulator", href: "/simulator" },
   { label: "Our Work", href: "/projects" },
   { label: "About Us", href: "/about" },
   { label: "Contact", href: "/contact" },

@@ -9,6 +9,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/services", priority: 0.9, changeFrequency: "monthly" },
     { path: "/invisible-audio", priority: 0.8, changeFrequency: "monthly" },
     { path: "/outdoor", priority: 0.8, changeFrequency: "monthly" },
+    { path: "/simulator", priority: 0.7, changeFrequency: "monthly" },
     { path: "/projects", priority: 0.8, changeFrequency: "monthly" },
     { path: "/about", priority: 0.6, changeFrequency: "yearly" },
     { path: "/contact", priority: 0.7, changeFrequency: "yearly" },
