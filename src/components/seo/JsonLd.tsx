@@ -10,7 +10,7 @@ const jsonLd = {
   "@id": `${SITE_URL}/#business`,
   name: "AI Intelligent Services",
   url: SITE_URL,
-  image: `${SITE_URL}/opengraph-image`,
+  image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&q=80",
   description:
     "Premium smart home automation and corporate AV integration. Crestron, RTI, Q-SYS, Lutron, JBL CONCEAL and Sonance specialists serving the Greater Toronto Area and Canada-wide.",
   email: "admin@intelligentai.services",
