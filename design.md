@@ -153,6 +153,9 @@ Every page hero image uses `.hero-img-settle` (slow 3.4s scale 1.16→1.0 settle
 ### 5. Living Room lighting demo (RoomJourney slide 01)
 Demonstrates one-touch scene control: `.scene-cycle` (soft-light overlay) tints the room through **Daylight → Evening → Focus → Cinema → Entertain** on a 22s loop; a synced caption (`.scene-name-*`) and the floor-plan glow dot (`.scene-dot`) change with it. All three share the same 22s timeline from load and are opacity-gated to the active slide so they stay in lockstep.
 
+### 6. Interactive Smart Home Simulator (`/simulator`)
+A working, client-side demo of a system we'd install: a touch-panel and a remote emulator control a reactive virtual home (lighting, motorized shades, real audio + video playback) where every element is mapped to its real location in the room photo. See `CLAUDE.md` → "Smart Home Simulator" for the architecture; geometry lives in `src/components/simulator/simulatorData.ts`.
+
 ## Animation & Interaction Guidelines
 
 ### Entrance Animations
@@ -264,7 +267,7 @@ images: {
 
 - Every page exports `metadata` (`title`, `description`, `openGraph`, `twitter`). Client-component pages (`/projects`, `/contact`) carry it via a sibling `layout.tsx`.
 - Title template `"Page Name | AI Intelligent Services"`; `metadataBase` = `https://intelligentai.systems`.
-- File-based SEO: `sitemap.ts`, `robots.ts`, `manifest.ts` (PWA), `opengraph-image.tsx` (branded OG card via `next/og`), `not-found.tsx` (branded 404).
+- File-based SEO: `sitemap.ts`, `robots.ts`, `manifest.ts` (PWA), `not-found.tsx` (branded 404). The shared-link (Open Graph) image is the Unsplash URL set in `layout.tsx` metadata `openGraph.images` — there is no generated `opengraph-image` route (it was removed on request).
 - Structured data: `components/seo/JsonLd.tsx` (LocalBusiness/ElectronicsStore, rendered in layout) + `FAQPage` JSON-LD inside `FAQ.tsx`.
 - Each page has a unique display-font `<h1>`; all images have descriptive `alt`.
 - **Contact email shown anywhere must be `admin@intelligentai.services`** (`.services`, not `.systems`).

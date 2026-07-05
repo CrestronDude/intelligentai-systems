@@ -20,16 +20,18 @@
 │   │   │   └── layout.tsx          # metadata
 │   │   ├── invisible-audio/page.tsx# JBL CONCEAL C62/C83/C86/C82W + DA850/DA1650 + rooms walkthrough
 │   │   ├── outdoor/page.tsx        # Outdoor Living: audio / lighting / gates / pool walkthrough
+│   │   ├── simulator/page.tsx      # Interactive Smart Home Simulator
 │   │   ├── api/contact/route.ts    # LIVE Brevo email + BotID/honeypot/timing/rate-limit/zod
 │   │   ├── sitemap.ts              # All routes
 │   │   ├── robots.ts               # Crawl rules + sitemap ref
 │   │   ├── manifest.ts             # PWA manifest (charcoal theme)
-│   │   ├── opengraph-image.tsx     # Branded OG card (next/og ImageResponse)
 │   │   └── not-found.tsx           # Branded 404
+│   │                               # (OG share image = Unsplash URL in layout metadata;
+│   │                               #  no opengraph-image route)
 │   │
 │   ├── components/
 │   │   ├── layout/
-│   │   │   ├── Navigation.tsx      # Fixed nav (Home/Services/Invisible Audio/Outdoor/Work/About)
+│   │   │   ├── Navigation.tsx      # Fixed nav (Home/Services/Invisible Audio/Outdoor/Simulator/Work/About)
 │   │   │   └── Footer.tsx          # Links, technology partners, Cahoni callout
 │   │   ├── home/
 │   │   │   ├── Hero.tsx            # Parallax hero + slow settle + staggered load-in
@@ -47,6 +49,13 @@
 │   │   │   ├── SpaceWalkthrough.tsx# Reusable continuous scroll-scrub walkthrough (imperative rAF)
 │   │   │   ├── SmoothScroll.tsx    # Global Lenis smooth scrolling
 │   │   │   └── ScrollReveal.tsx    # Global [data-reveal] reveal engine (IO + MutationObserver)
+│   │   ├── simulator/
+│   │   │   ├── Simulator.tsx       # State (useReducer) + layout + interface toggle
+│   │   │   ├── RoomStage.tsx       # Reactive environment: lighting, blinds, video, audio viz
+│   │   │   ├── TouchPanel.tsx      # Crestron-style touch panel interface
+│   │   │   ├── RemoteControl.tsx   # Handheld remote interface
+│   │   │   ├── useHomeAudio.ts     # Real MP3 playback + Web Audio analyser
+│   │   │   └── simulatorData.ts    # Rooms/scenes/sources + per-room screen/window geometry
 │   │   ├── seo/
 │   │   │   └── JsonLd.tsx          # LocalBusiness/ElectronicsStore structured data
 │   │   └── ui/
@@ -63,9 +72,13 @@
 │
 ├── public/
 │   ├── favicon.ico
-│   └── images/
-│       ├── jbl/  c62.png c83.png c86.png c82w.png da850.jpg   # official JBL imagery
-│       └── home-theater.jpg                                   # residential home theater
+│   ├── images/
+│   │   ├── jbl/  c62.png c83.png c86.png c82w.png da850.jpg   # official JBL imagery
+│   │   ├── home-theater.jpg                                   # residential home theater
+│   │   ├── digital-signage.jpg  corporate-av.jpg             # corporate AV service imagery
+│   └── media/
+│       ├── video/  cinema.mp4 nature.mp4 studio.mp4          # simulator video (Blender CC)
+│       └── audio/  track-1.mp3 track-2.mp3 track-3.mp3       # simulator audio (SoundHelix demo)
 │
 ├── next.config.ts                  # Image remotePatterns (Unsplash) + AVIF/WebP + withBotId
 ├── package.json                    # Next 16, Tailwind v4, Lenis, BotID, RHF, Zod, Framer Motion

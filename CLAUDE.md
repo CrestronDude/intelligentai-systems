@@ -33,8 +33,11 @@ src/
     contact/layout.tsx      # metadata for /contact
     invisible-audio/page.tsx# JBL CONCEAL (C62/C83/C86/C82W) + DA850/DA1650 amps + rooms walkthrough
     outdoor/page.tsx        # Outdoor Living — landscape audio, lighting, gates, pool (walkthrough)
+    simulator/page.tsx      # Interactive Smart Home Simulator (touch panel + remote + live env)
     api/contact/route.ts    # LIVE Brevo email + BotID/honeypot/timing/rate-limit/zod protection
-    sitemap.ts robots.ts manifest.ts opengraph-image.tsx not-found.tsx   # SEO / PWA / 404
+    sitemap.ts robots.ts manifest.ts not-found.tsx   # SEO / PWA / 404
+                            # (OG share image is the Unsplash URL in layout metadata — no
+                            #  opengraph-image route; it was removed on request)
   components/
     layout/ Navigation.tsx Footer.tsx
     home/   Hero.tsx RoomJourney.tsx TrustBar.tsx ServicesOverview.tsx
@@ -43,13 +46,19 @@ src/
     shared/ SpaceWalkthrough.tsx  # reusable continuous scroll-scrub "walk through spaces"
             SmoothScroll.tsx      # global Lenis smooth scrolling
             ScrollReveal.tsx      # global [data-reveal] on-scroll reveal engine
+    simulator/ Simulator.tsx      # smart-home sim: state + layout + interface toggle
+               RoomStage.tsx      # reactive environment (lighting, blinds, video, audio viz)
+               TouchPanel.tsx RemoteControl.tsx   # the two control interfaces
+               useHomeAudio.ts    # real MP3 playback + Web Audio analyser
+               simulatorData.ts   # rooms/scenes/sources + per-room screen/window geometry
     seo/    JsonLd.tsx            # LocalBusiness/ElectronicsStore structured data
     ui/     TiltCard.tsx CahoniLink.tsx
   lib/
     utils.ts                # cn()
     data/ projects.ts services.ts jbl.ts certifications.ts
 public/
-  images/ jbl/*.png  home-theater.jpg   # locally-hosted real product/room imagery
+  images/ jbl/*.png  home-theater.jpg  digital-signage.jpg  corporate-av.jpg   # local imagery
+  media/  video/*.mp4  audio/*.mp3      # self-hosted clips + tracks for the simulator
 ```
 
 ---
@@ -69,6 +78,18 @@ The site's signature feel is **cinematic, scroll-driven motion**. Preserve it. S
 5. **Living Room lighting demo** (RoomJourney slide 01) — `.scene-cycle` overlay tints the room through Daylight→Evening→Focus→Cinema→Entertain on a 22s loop; a synced caption (`.scene-name-*`) and the floor-plan glow dot (`.scene-dot`) change with it. All three share the same 22s timeline from load and are opacity-gated to the active slide so they never drift.
 
 6. **`prefers-reduced-motion`** is honored globally (see the media query in `globals.css`). Any new motion must degrade gracefully.
+
+---
+
+## Smart Home Simulator (`/simulator`)
+
+A fully client-side interactive demo (`src/components/simulator/*`). One `useReducer` holds per-room state; two interfaces (`TouchPanel`, `RemoteControl`) mutate it; `RoomStage` visualizes it live.
+
+- **Photoreal mapping** — each room's controllable elements sit at their ACTUAL location in the room photo, driven by per-room geometry rects in `simulatorData.ts` (`ROOMS[].screen` and `ROOMS[].window`, in %). The Home Theater video plays on the real screen; living/bedroom powered shades cover the real windows. **To fix alignment, adjust those % rects** — nothing else.
+- **Real media, self-hosted** in `public/media/` — video clips (Blender open movies, CC) and audio tracks (SoundHelix demo). ⚠️ Confirm/replace licensing before heavy production use.
+- **Audio** — `useHomeAudio.ts` plays the MP3 via an `Audio()` element routed through a Web Audio `AnalyserNode` (created inside a user gesture), so the equalizer reacts to the real track. Returns a memoized engine (stable identity — don't break that).
+- **Lighting** dims the photo's real fixtures via a CSS `brightness()` filter + warm ambiance glow + color wash; shades closing darkens further.
+- **Mobile**: the fixed `80vh` side-by-side frame and inner panel scrolling are `lg:`-only. On phones the stage is `~44vh` and the panel/remote expand to full natural height (page scrolls).
 
 ---
 
