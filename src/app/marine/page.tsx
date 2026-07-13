@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import MarineConnectivitySection from "@/components/home/MarineConnectivitySection";
 
 export const metadata: Metadata = {
   title: "JBL Marine Audio",
@@ -146,6 +147,9 @@ export default function MarinePage() {
           </div>
         </div>
       </section>
+
+      {/* Marine internet & satellite */}
+      <MarineConnectivitySection />
 
       {/* Process */}
       <section className="section-padding bg-charcoal-800">
