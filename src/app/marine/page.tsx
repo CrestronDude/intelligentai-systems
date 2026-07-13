@@ -3,10 +3,38 @@ import Image from "next/image";
 import Link from "next/link";
 import MarineConnectivitySection from "@/components/home/MarineConnectivitySection";
 
+const MARINE_TITLE = "JBL Marine Audio, Internet & Satellite — On-Site Installation";
+const MARINE_DESC =
+  "Authorized JBL Marine Audio dealer + Starlink Maritime and Bell marine internet installers serving Ontario. On-site assessment, custom design, premium speakers & amplifiers, and professional connectivity installs — we come to your boat or marina.";
+// Share/link-preview image — the JBL Marine ad poster (832×1248) with all
+// features listed. Resolved to an absolute URL via metadataBase (layout.tsx).
+const MARINE_OG_IMAGE = "/images/jbl-marine-audio.jpg";
+
 export const metadata: Metadata = {
-  title: "JBL Marine Audio",
-  description:
-    "Authorized JBL Marine Audio dealer and installer serving Ontario. On-site assessment, custom system design, premium marine speakers and amplifiers, and expert professional installation — we travel to your boat.",
+  title: MARINE_TITLE,
+  description: MARINE_DESC,
+  alternates: { canonical: "/marine" },
+  openGraph: {
+    type: "website",
+    url: "https://intelligentai.systems/marine",
+    siteName: "AI Intelligent Services",
+    title: MARINE_TITLE,
+    description: MARINE_DESC,
+    images: [
+      {
+        url: MARINE_OG_IMAGE,
+        width: 832,
+        height: 1248,
+        alt: "JBL Marine Audio Systems — professional on-site assessment & installation. Authorized dealer serving Ontario. (647) 272-3150",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: MARINE_TITLE,
+    description: MARINE_DESC,
+    images: [MARINE_OG_IMAGE],
+  },
 };
 
 const PHONE_DISPLAY = "(647) 272-3150";
