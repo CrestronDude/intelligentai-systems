@@ -130,7 +130,7 @@ export default function ContactPage() {
     <>
       {/* Hero */}
       <section className="relative pt-40 pb-16 bg-charcoal">
-        <div className="container-luxury" data-reveal>
+        <div className="container-luxury" data-reveal-stagger>
           <span className="text-label text-gold block mb-4">Contact</span>
           <h1 className="text-display-lg text-cream mb-6">
             Let&apos;s build something

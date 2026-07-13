@@ -100,7 +100,7 @@ export default function OutdoorPage() {
           <div className="absolute inset-0 hero-gradient" />
           <div className="absolute inset-0 bg-charcoal/45" />
         </div>
-        <div className="relative z-10 container-luxury pb-16 w-full" data-reveal>
+        <div className="relative z-10 container-luxury pb-16 w-full" data-reveal-stagger>
           <span className="text-label text-gold block mb-4">Outdoor Living</span>
           <h1 className="text-display-lg text-cream mb-6">
             The experience

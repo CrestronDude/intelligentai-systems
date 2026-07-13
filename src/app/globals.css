@@ -496,6 +496,32 @@ body {
   }
 }
 
+/* Staggered hero content — direct children cascade in (like the homepage hero) */
+.reveal-on [data-reveal-stagger] > * {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+.reveal-on [data-reveal-stagger].is-visible > * {
+  opacity: 1;
+  transform: none;
+}
+.reveal-on [data-reveal-stagger].is-visible > *:nth-child(1) { transition-delay: 0.05s; }
+.reveal-on [data-reveal-stagger].is-visible > *:nth-child(2) { transition-delay: 0.22s; }
+.reveal-on [data-reveal-stagger].is-visible > *:nth-child(3) { transition-delay: 0.4s; }
+.reveal-on [data-reveal-stagger].is-visible > *:nth-child(4) { transition-delay: 0.58s; }
+.reveal-on [data-reveal-stagger].is-visible > *:nth-child(5) { transition-delay: 0.76s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-on [data-reveal-stagger] > * {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
 /* ─── Image Treatment ─────────────────────────────────────────────────────── */
 
 .image-luxury {

@@ -16,7 +16,12 @@ import { useEffect } from "react";
  * Optional attributes on a `data-reveal` element:
  *   data-reveal="up" | "left" | "right" | "scale"   (direction, default "up")
  *   data-reveal-delay="120"                          (ms stagger delay)
+ *
+ * A container marked `data-reveal-stagger` reveals its DIRECT CHILDREN in
+ * sequence (CSS nth-child delays) — used for hero content so the label →
+ * headline → subtext → CTAs cascade in like the homepage hero.
  */
+const SELECTOR = "[data-reveal], [data-reveal-stagger]";
 export default function ScrollReveal() {
   useEffect(() => {
     const root = document.documentElement;
@@ -25,7 +30,7 @@ export default function ScrollReveal() {
     if (reduce) {
       // Make sure nothing is left hidden.
       root.classList.remove("reveal-on");
-      document.querySelectorAll<HTMLElement>("[data-reveal]").forEach((el) => {
+      document.querySelectorAll<HTMLElement>(SELECTOR).forEach((el) => {
         el.classList.add("is-visible");
       });
       return;
@@ -53,7 +58,11 @@ export default function ScrollReveal() {
     };
 
     const scan = () =>
-      document.querySelectorAll<HTMLElement>("[data-reveal]:not(.is-visible)").forEach(observe);
+      document
+        .querySelectorAll<HTMLElement>(
+          "[data-reveal]:not(.is-visible), [data-reveal-stagger]:not(.is-visible)"
+        )
+        .forEach(observe);
 
     scan();
 
@@ -62,8 +71,12 @@ export default function ScrollReveal() {
       for (const m of mutations) {
         m.addedNodes.forEach((node) => {
           if (!(node instanceof HTMLElement)) return;
-          if (node.matches?.("[data-reveal]")) observe(node);
-          node.querySelectorAll?.("[data-reveal]:not(.is-visible)").forEach(observe);
+          if (node.matches?.(SELECTOR)) observe(node);
+          node
+            .querySelectorAll?.(
+              "[data-reveal]:not(.is-visible), [data-reveal-stagger]:not(.is-visible)"
+            )
+            .forEach(observe);
         });
       }
     });
