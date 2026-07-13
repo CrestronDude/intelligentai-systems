@@ -9,62 +9,43 @@ export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
 export default async function Image() {
-  // Composite the JBL Marine ad poster into the right panel.
-  const poster = await readFile(
-    join(process.cwd(), "public/images/jbl-marine-audio.jpg")
-  );
-  const posterSrc = `data:image/jpeg;base64,${poster.toString("base64")}`;
+  const bg = await readFile(join(process.cwd(), "public/images/marine-og-bg.jpg"));
+  const bgSrc = `data:image/jpeg;base64,${bg.toString("base64")}`;
 
   return new ImageResponse(
     (
-      <div
-        style={{
-          width: "100%",
-          height: "100%",
-          display: "flex",
-          background: "linear-gradient(135deg, #081521 0%, #0b2036 60%, #0a1626 100%)",
-          fontFamily: "sans-serif",
-        }}
-      >
-        {/* Left: messaging */}
-        <div
-          style={{
-            flex: 1,
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "space-between",
-            padding: "56px 58px",
-          }}
-        >
+      <div style={{ width: "100%", height: "100%", position: "relative", display: "flex", fontFamily: "sans-serif" }}>
+        {/* Full-bleed marine background */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={bgSrc} width={1200} height={630} alt="" style={{ position: "absolute", top: 0, left: 0, width: 1200, height: 630, objectFit: "cover" }} />
+        {/* Legibility overlays */}
+        <div style={{ position: "absolute", top: 0, left: 0, width: 1200, height: 630, display: "flex", background: "linear-gradient(90deg, rgba(6,14,24,0.92) 0%, rgba(6,14,24,0.6) 42%, rgba(6,14,24,0.1) 72%, rgba(6,14,24,0) 100%)" }} />
+        <div style={{ position: "absolute", top: 0, left: 0, width: 1200, height: 630, display: "flex", background: "linear-gradient(0deg, rgba(6,14,24,0.85) 0%, rgba(6,14,24,0) 48%)" }} />
+
+        {/* Content */}
+        <div style={{ position: "relative", display: "flex", flexDirection: "column", justifyContent: "space-between", width: "100%", height: "100%", padding: 56 }}>
+          <div style={{ display: "flex" }}>
+            <div style={{ display: "flex", color: "#C9A96E", fontSize: 19, letterSpacing: 3, border: "1px solid rgba(201,169,110,0.55)", padding: "9px 16px" }}>
+              AUTHORIZED JBL MARINE INSTALLER
+            </div>
+          </div>
+
           <div style={{ display: "flex", flexDirection: "column" }}>
-            <div style={{ display: "flex", color: "#C9A96E", fontSize: 22, letterSpacing: 4 }}>
+            <div style={{ display: "flex", color: "#C9A96E", fontSize: 21, letterSpacing: 3, marginBottom: 14 }}>
               AI INTELLIGENT SERVICES · MARINE
             </div>
-            <div style={{ display: "flex", flexDirection: "column", marginTop: 26, lineHeight: 1.04 }}>
-              <span style={{ color: "#F5F0E8", fontSize: 66 }}>JBL Marine Audio</span>
-              <span style={{ color: "#C9A96E", fontSize: 66 }}>Internet &amp; Satellite</span>
+            <div style={{ display: "flex", flexDirection: "column", lineHeight: 1.05 }}>
+              <span style={{ color: "#F5F0E8", fontSize: 58 }}>JBL Marine Audio, Internet</span>
+              <span style={{ color: "#C9A96E", fontSize: 58 }}>&amp; Satellite Installations</span>
             </div>
-            <div style={{ display: "flex", color: "#d3dde8", fontSize: 27, marginTop: 26 }}>
-              Professional on-site installation — we come to your boat.
+            <div style={{ display: "flex", color: "#dbe4ee", fontSize: 23, marginTop: 18 }}>
+              Starlink Maritime · Bell Marina Internet · On-Site Professional Installation
             </div>
-            <div style={{ display: "flex", color: "#9fb1c4", fontSize: 21, marginTop: 16 }}>
-              Authorized JBL dealer · Starlink Maritime · Bell marina internet
-            </div>
-          </div>
-          <div style={{ display: "flex", flexDirection: "column" }}>
-            <div style={{ display: "flex", color: "#C9A96E", fontSize: 48, fontWeight: 700 }}>
-              (647) 272-3150
-            </div>
-            <div style={{ display: "flex", color: "#7f93a6", fontSize: 20, marginTop: 6 }}>
-              intelligentai.systems · Serving Ontario
+            <div style={{ display: "flex", alignItems: "center", marginTop: 24 }}>
+              <span style={{ color: "#C9A96E", fontSize: 42, fontWeight: 700 }}>(647) 272-3150</span>
+              <span style={{ color: "#aebfce", fontSize: 20, marginLeft: 26 }}>intelligentai.systems · Serving Ontario</span>
             </div>
           </div>
-        </div>
-
-        {/* Right: poster */}
-        <div style={{ display: "flex", width: 452, height: 630 }}>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={posterSrc} width={452} height={630} style={{ objectFit: "cover" }} alt="" />
         </div>
       </div>
     ),
