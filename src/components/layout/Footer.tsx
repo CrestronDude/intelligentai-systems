@@ -7,6 +7,7 @@ const services = [
   { label: "Home Cinema & AV", href: "/services#home-theater" },
   { label: "Invisible Audio — JBL CONCEAL", href: "/invisible-audio" },
   { label: "Outdoor Living", href: "/outdoor" },
+  { label: "JBL Marine Audio", href: "/marine" },
   { label: "Corporate AV Integration", href: "/services#corporate-av" },
   { label: "Boardroom Design", href: "/services#boardroom-av" },
   { label: "Cahoni AI — Quoting Platform", href: "https://intelligentai.services/", external: true },

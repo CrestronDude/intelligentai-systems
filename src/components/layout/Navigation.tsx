@@ -11,6 +11,7 @@ const navLinks = [
   { href: "/services", label: "Services" },
   { href: "/invisible-audio", label: "Invisible Audio" },
   { href: "/outdoor", label: "Outdoor" },
+  { href: "/marine", label: "Marine" },
   { href: "/simulator", label: "Simulator" },
   { href: "/projects", label: "Work" },
   { href: "/about", label: "About" },

@@ -1,0 +1,191 @@
+import type { Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "JBL Marine Audio",
+  description:
+    "Authorized JBL Marine Audio dealer and installer serving Ontario. On-site assessment, custom system design, premium marine speakers and amplifiers, and expert professional installation — we travel to your boat.",
+};
+
+const PHONE_DISPLAY = "(647) 272-3150";
+const PHONE_HREF = "tel:+16472723150";
+
+const pillars = [
+  {
+    title: "Premium JBL Marine Systems",
+    body: "Marine-grade speakers, tower and wakeboard speakers, amplifiers, subwoofers, and head units — engineered to resist sun, salt, and spray while delivering crystal-clear sound on the water.",
+    items: ["Coaxial & component marine speakers", "Wake-tower & cockpit speakers", "Marine amplifiers & subwoofers", "Weatherproof source units & controls"],
+  },
+  {
+    title: "On-Site Assessment & Custom Design",
+    body: "We come to your boat, assess the vessel, acoustics, and how you use it, then design a system tailored to your layout and listening goals — with transparent, itemized pricing.",
+    items: ["On-board evaluation at your marina", "System design matched to your vessel", "Zones for helm, cockpit & swim platform", "Clear written proposal"],
+  },
+  {
+    title: "Expert Professional Installation",
+    body: "Clean, marine-grade installation done right: proper mounting, sealed and protected wiring, corrosion-resistant connections, and full system tuning and calibration.",
+    items: ["Marine-grade mounting & waterproofing", "Protected, corrosion-resistant wiring", "System tuning & calibration", "Walkthrough & handover"],
+  },
+  {
+    title: "Authorized Dealer & Support",
+    body: "As an authorized JBL Marine dealer we supply genuine equipment backed by manufacturer warranty, with ongoing support and service after the install.",
+    items: ["Genuine JBL Marine equipment", "Manufacturer warranty", "Ongoing support & service", "Serving Ontario, boat-side"],
+  },
+];
+
+const steps = [
+  { n: "01", title: "On-Site Assessment", body: "We travel to your boat to evaluate the vessel and understand how you want to use it." },
+  { n: "02", title: "Custom Design & Quote", body: "A tailored system design with transparent, itemized pricing — no surprises." },
+  { n: "03", title: "Supply", body: "Genuine JBL Marine equipment, sourced as an authorized dealer." },
+  { n: "04", title: "Install & Tune", body: "Professional marine-grade installation, fully tuned and handed over." },
+];
+
+export default function MarinePage() {
+  return (
+    <>
+      {/* Hero */}
+      <section className="relative h-[64vh] min-h-[460px] flex items-end overflow-hidden">
+        <div className="absolute inset-0">
+          <Image
+            src="https://images.unsplash.com/photo-1520255870062-bd79d3865de7?w=1920&q=85&fit=crop"
+            alt="Luxury boat on the water at sunset"
+            fill
+            priority
+            className="object-cover object-center hero-img-settle"
+            sizes="100vw"
+          />
+          <div className="absolute inset-0 hero-gradient" />
+          <div className="absolute inset-0" style={{ background: "linear-gradient(160deg, rgba(10,20,32,0.55), rgba(10,22,46,0.35))" }} />
+        </div>
+        <div className="relative z-10 container-luxury pb-16 w-full" data-reveal>
+          <span className="text-label text-gold block mb-4">Marine Audio · Authorized JBL Dealer</span>
+          <h1 className="text-display-lg text-cream mb-6">
+            JBL Marine Audio,
+            <br />
+            <em className="text-gold not-italic">installed at your boat.</em>
+          </h1>
+          <p className="text-base text-warm-gray max-w-xl leading-relaxed mb-8">
+            Premium, marine-grade sound — professionally assessed, designed, and
+            installed on-site. We travel to your boat anywhere in Ontario.
+          </p>
+          <div className="flex flex-wrap items-center gap-4">
+            <Link href="/contact" className="btn-gold-shimmer inline-flex items-center gap-3 px-8 py-4 bg-gold text-charcoal text-label hover:bg-gold-light transition-colors duration-300">
+              Book On-Site Assessment
+            </Link>
+            <a href={PHONE_HREF} className="inline-flex items-center gap-3 px-8 py-4 border border-cream/25 text-cream text-label hover:border-gold hover:text-gold transition-all duration-300">
+              {PHONE_DISPLAY}
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* We come to you — poster feature */}
+      <section
+        className="section-padding relative overflow-hidden"
+        style={{ background: "linear-gradient(160deg, #0a1420 0%, #0b1c2e 45%, #0a1622 100%)" }}
+      >
+        <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(90% 60% at 80% 0%, rgba(58,110,165,0.16), transparent 60%)" }} />
+        <div className="container-luxury relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-[minmax(280px,40%)_1fr] gap-12 lg:gap-16 items-center">
+            <div data-reveal="left">
+              <div className="relative border border-gold/25 shadow-2xl">
+                <Image
+                  src="/images/jbl-marine-audio.jpg"
+                  alt="JBL Marine Audio Systems — on-site assessment and installation"
+                  width={832}
+                  height={1248}
+                  className="w-full h-auto"
+                  sizes="(max-width: 1024px) 90vw, 38vw"
+                />
+              </div>
+            </div>
+            <div data-reveal="right" data-reveal-delay={120}>
+              <span className="inline-flex items-center gap-2 text-label text-gold text-[0.6rem] border border-gold/30 px-3 py-1.5 mb-6">
+                <span className="w-1.5 h-1.5 rounded-full bg-gold" />
+                We Travel to Your Boat
+              </span>
+              <h2 className="text-display-md text-cream mb-5">Sound as good as the view.</h2>
+              <p className="text-base text-cream-muted leading-relaxed max-w-xl mb-4">
+                Whether it&apos;s a wakeboard boat, cruiser, or yacht, we design and
+                install JBL Marine systems that stand up to sun, salt, and spray —
+                and sound extraordinary from the helm to the swim platform.
+              </p>
+              <p className="text-base text-warm-gray leading-relaxed max-w-xl">
+                No hauling your boat to a shop. We come to your marina, assess on
+                board, and handle everything from design to a clean, tuned install.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* What we deliver */}
+      <section className="section-padding bg-charcoal">
+        <div className="container-luxury">
+          <div className="max-w-2xl mb-14" data-reveal>
+            <span className="text-label text-gold block mb-4">What We Deliver</span>
+            <h2 className="text-display-md text-cream">Marine audio, done to a higher standard.</h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-charcoal-500">
+            {pillars.map((p, i) => (
+              <div key={p.title} data-reveal data-reveal-delay={(i % 2) * 110} className="bg-charcoal p-8 md:p-10">
+                <div className="w-8 h-px bg-gold mb-5" />
+                <h3 className="font-display text-2xl text-cream font-light mb-4">{p.title}</h3>
+                <p className="text-sm text-warm-gray leading-relaxed mb-6">{p.body}</p>
+                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                  {p.items.map((it) => (
+                    <li key={it} className="flex items-start gap-2 text-sm text-cream-muted">
+                      <span className="w-1 h-1 rounded-full bg-gold mt-2 flex-shrink-0" />
+                      {it}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Process */}
+      <section className="section-padding bg-charcoal-800">
+        <div className="container-luxury">
+          <div className="max-w-2xl mb-14" data-reveal>
+            <span className="text-label text-gold block mb-4">How It Works</span>
+            <h2 className="text-display-md text-cream">From marina visit to first play.</h2>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-charcoal-500">
+            {steps.map((s, i) => (
+              <div key={s.n} data-reveal data-reveal-delay={i * 90} className="bg-charcoal-800 p-8">
+                <span className="font-display text-4xl text-charcoal-500 font-light block mb-5">{s.n}</span>
+                <h3 className="font-display text-xl text-cream font-light mb-3">{s.title}</h3>
+                <p className="text-sm text-warm-gray leading-relaxed">{s.body}</p>
+              </div>
+            ))}
+          </div>
+          <p className="text-sm text-warm-gray mt-8" data-reveal>
+            Serving the Greater Toronto Area and across Ontario — we travel to your boat or marina.
+          </p>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="section-padding-sm bg-gold">
+        <div className="container-luxury text-center" data-reveal>
+          <h2 className="font-display text-4xl text-charcoal font-light mb-4">Ready for better sound on the water?</h2>
+          <p className="text-charcoal/70 mb-8 text-sm max-w-md mx-auto">
+            Book a complimentary on-site assessment — we&apos;ll come to your boat.
+          </p>
+          <div className="flex flex-wrap items-center justify-center gap-5">
+            <Link href="/contact" className="inline-flex items-center gap-3 px-10 py-4 bg-charcoal text-cream text-label hover:bg-charcoal-700 transition-colors duration-300">
+              Book On-Site Assessment
+            </Link>
+            <a href={PHONE_HREF} className="text-label text-charcoal hover:text-charcoal-700 transition-colors duration-300">
+              {PHONE_DISPLAY}
+            </a>
+          </div>
+        </div>
+      </section>
+    </>
+  );
+}

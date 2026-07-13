@@ -14,7 +14,7 @@ import Link from "next/link";
 const PHONE_DISPLAY = "(647) 272-3150";
 const PHONE_HREF = "tel:+16472723150";
 const BOOK_HREF = "/contact"; // "Book On-Site Assessment"
-const LEARN_MORE_HREF = "/services#home-cinema"; // "Learn more" — point anywhere later
+const LEARN_MORE_HREF = "/marine"; // "Learn more" → dedicated marine page
 const POSTER_SRC = "/images/jbl-marine-audio.jpg";
 
 const BENEFITS = [
