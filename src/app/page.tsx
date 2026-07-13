@@ -7,6 +7,7 @@ import WhyUs from "@/components/home/WhyUs";
 import Testimonials from "@/components/home/Testimonials";
 import Assurance from "@/components/home/Assurance";
 import AIToolsSection from "@/components/home/AIToolsSection";
+import MarineAudioPromo from "@/components/home/MarineAudioPromo";
 import FAQ from "@/components/home/FAQ";
 import FinalCTA from "@/components/home/FinalCTA";
 
@@ -22,6 +23,7 @@ export default function Home() {
       <Testimonials />
       <Assurance />
       <AIToolsSection />
+      <MarineAudioPromo />
       <FAQ />
       <FinalCTA />
     </>
