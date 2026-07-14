@@ -63,8 +63,9 @@ const steps = [
 export default function MarinePage() {
   return (
     <>
-      {/* Hero */}
-      <section className="relative h-[64vh] min-h-[460px] flex items-end overflow-hidden">
+      {/* Hero — taller on mobile so the fuller content clears the fixed nav
+          and isn't clipped at the top on short viewports. */}
+      <section className="relative flex items-end overflow-hidden h-[86vh] min-h-[640px] pt-24 lg:h-[64vh] lg:min-h-[480px] lg:pt-0">
         <div className="absolute inset-0">
           <Image
             src="https://images.unsplash.com/photo-1520255870062-bd79d3865de7?w=1920&q=85&fit=crop"
