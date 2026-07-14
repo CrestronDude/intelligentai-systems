@@ -39,3 +39,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Client catalog source (kept out of repo)
+JBL_Marine_Website_Catalog_AI_Intelligent_Services.xlsx
+*.xlsx

@@ -52,6 +52,7 @@ export default function ContactPage() {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors, isSubmitting },
   } = useForm<FormData>({
     resolver: zodResolver(schema),
@@ -60,6 +61,21 @@ export default function ContactPage() {
       budget: "prefer-not-to-say",
     },
   });
+
+  // Prefill from a "build a system" hand-off (e.g. the Marine catalog links to
+  // /contact?build=<items>). We drop the selection into the message and mark the
+  // project type as "other" so the enquiry arrives with the chosen system.
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const build = params.get("build");
+    if (build) {
+      setValue(
+        "message",
+        `I'd like a quote to build a JBL Marine audio system with the following: ${build}.\n\nMy boat is a `,
+      );
+      setValue("projectType", "other");
+    }
+  }, [setValue]);
 
   const onSubmit = async (data: FormData) => {
     setSubmitError(null);
