@@ -101,8 +101,9 @@ A fully client-side interactive demo (`src/components/simulator/*`). One `useRed
 
 The marine section covers **JBL Marine Audio + Starlink/Bell connectivity**, reusing three components (also used on the homepage): `MarineAudioPromo` (ad poster + CTAs), `MarineConnectivitySection` (Starlink Maritime / Bell marina internet / bundle), and `MarineCatalog` (filterable product grid).
 
-- **Catalog data**: `src/lib/data/jblMarine.ts` — 27 products (amps/subs/speakers+tower) with model, spec, price (MSRP CAD), description, best-for. Transcribed from the client's catalog spreadsheet (kept out of the repo).
-- **Product photos**: each card loads `/images/marine/<MODEL>.jpg` and falls back to a branded placeholder via `<img> onError` until the photo exists. Drop photos into `public/images/marine/` using the model-number filenames to light them up.
+- **Catalog data**: `src/lib/data/jblMarine.ts` — 27 products (amps/subs/speakers+tower) with model, spec, description, best-for. Transcribed from the client's catalog spreadsheet (kept out of the repo; gitignored `*.xlsx`). A `price` field still exists in the data but is **no longer displayed**.
+- **No pricing / build-a-system**: `MarineCatalog.tsx` shows no prices. Each card has *Add to System* (toggles a selection) + *Get Quote*; a floating bar summarizes the selected build with a *Request a Quote* CTA linking to `/contact?subject=…&build=…`. The contact page reads `?build=` and prefills the message.
+- **Product photos**: all 27 are present in `public/images/marine/<MODEL>.jpg` (real official JBL renders on white/neutral backgrounds, verified per model/size/colour variant). The card still falls back to a branded placeholder via `<img> onError` if a file is ever missing. To source more: JBL dealers on Shopify expose `/search/suggest.json` + product sitemaps; Sonic Electronix / creativeaudio.net / JBL's `mm.jbl.com` CDN host hotlinkable renders.
 - **Share image**: `marine/opengraph-image.tsx` renders a 1200×630 landscape card over `public/images/marine-og-bg.jpg` (marine-only; the rest of the site keeps the default OG image).
 - Phone `(647) 272-3150`; service area copy is "Greater Toronto Area / Ontario" (Steven's preferred wording — don't swap to "Durham Region").
 
