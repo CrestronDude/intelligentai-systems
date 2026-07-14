@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import MarineConnectivitySection from "@/components/home/MarineConnectivitySection";
+import MarineCatalog from "@/components/home/MarineCatalog";
 
 const MARINE_TITLE = "JBL Marine Audio, Internet & Satellite — On-Site Installation";
 const MARINE_DESC =
@@ -87,7 +88,7 @@ export default function MarinePage() {
           </h1>
           <p className="text-base text-warm-gray max-w-xl leading-relaxed mb-8">
             Premium, marine-grade sound — professionally assessed, designed, and
-            installed on-site. We travel to your boat anywhere in Ontario.
+            installed on-site. We come to you across Durham Region and Ontario.
           </p>
           <div className="flex flex-wrap items-center gap-4">
             <Link href="/contact" className="btn-gold-shimmer inline-flex items-center gap-3 px-8 py-4 bg-gold text-charcoal text-label hover:bg-gold-light transition-colors duration-300">
@@ -167,6 +168,9 @@ export default function MarinePage() {
         </div>
       </section>
 
+      {/* JBL Marine product catalog */}
+      <MarineCatalog />
+
       {/* Marine internet & satellite */}
       <MarineConnectivitySection />
 
@@ -187,7 +191,7 @@ export default function MarinePage() {
             ))}
           </div>
           <p className="text-sm text-warm-gray mt-8" data-reveal>
-            Serving the Greater Toronto Area and across Ontario — we travel to your boat or marina.
+            Serving Durham Region and across Ontario — we come to your boat or marina.
           </p>
         </div>
       </section>
