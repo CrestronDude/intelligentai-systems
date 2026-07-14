@@ -20,6 +20,8 @@
 │   │   │   └── layout.tsx          # metadata
 │   │   ├── invisible-audio/page.tsx# JBL CONCEAL C62/C83/C86/C82W + DA850/DA1650 + rooms walkthrough
 │   │   ├── outdoor/page.tsx        # Outdoor Living: audio / lighting / gates / pool walkthrough
+│   │   ├── marine/page.tsx         # JBL Marine Audio + Starlink/Bell connectivity + catalog
+│   │   ├── marine/opengraph-image.tsx  # 1200×630 landscape share card (marine-only)
 │   │   ├── simulator/page.tsx      # Interactive Smart Home Simulator
 │   │   ├── api/contact/route.ts    # LIVE Brevo email + BotID/honeypot/timing/rate-limit/zod
 │   │   ├── sitemap.ts              # All routes
@@ -44,7 +46,10 @@
 │   │   │   ├── Assurance.tsx       # 4-up trust band
 │   │   │   ├── AIToolsSection.tsx  # Cahoni AI feature
 │   │   │   ├── FAQ.tsx             # Accordion + FAQPage JSON-LD (client)
-│   │   │   └── FinalCTA.tsx        # Full-bleed CTA
+│   │   │   ├── FinalCTA.tsx        # Full-bleed CTA
+│   │   │   ├── MarineAudioPromo.tsx        # JBL Marine ad poster + CTAs
+│   │   │   ├── MarineConnectivitySection.tsx  # Starlink / Bell / bundle
+│   │   │   └── MarineCatalog.tsx           # Filterable JBL Marine product grid (client)
 │   │   ├── shared/
 │   │   │   ├── SpaceWalkthrough.tsx# Reusable continuous scroll-scrub walkthrough (imperative rAF)
 │   │   │   ├── SmoothScroll.tsx    # Global Lenis smooth scrolling
@@ -68,7 +73,8 @@
 │           ├── projects.ts         # Project[] (residential + corporate case studies)
 │           ├── services.ts         # Service[] + ServiceCategory[] + Cahoni AI
 │           ├── jbl.ts              # CONCEAL speakers + DA Series amplifiers
-│           └── certifications.ts   # Verified certs grouped by discipline + affiliations
+│           ├── certifications.ts   # Verified certs grouped by discipline + affiliations
+│           └── jblMarine.ts        # JBL Marine catalog (27 products)
 │
 ├── public/
 │   ├── favicon.ico
@@ -76,6 +82,8 @@
 │   │   ├── jbl/  c62.png c83.png c86.png c82w.png da850.jpg   # official JBL imagery
 │   │   ├── home-theater.jpg                                   # residential home theater
 │   │   ├── digital-signage.jpg  corporate-av.jpg             # corporate AV service imagery
+│   │   ├── jbl-marine-audio.jpg  marine-og-bg.jpg           # marine poster + share bg
+│   │   ├── marine/                                          # JBL Marine product photos (by model #)
 │   └── media/
 │       ├── video/  cinema.mp4 nature.mp4 studio.mp4          # simulator video (Blender CC)
 │       └── audio/  track-1.mp3 track-2.mp3 track-3.mp3       # simulator audio (SoundHelix demo)

@@ -23,7 +23,7 @@ npm run lint     # ESLint
 
 ## Pages
 
-`/` home · `/services` · `/invisible-audio` (JBL CONCEAL + DA amps) · `/outdoor` (Outdoor Living) · `/simulator` (interactive smart-home demo) · `/projects` (case studies) · `/about` (story + certifications) · `/contact`
+`/` home · `/services` · `/invisible-audio` (JBL CONCEAL + DA amps) · `/outdoor` (Outdoor Living) · `/marine` (JBL Marine Audio + Starlink/Bell) · `/simulator` (interactive smart-home demo) · `/projects` (case studies) · `/about` (story + certifications) · `/contact`
 
 ## Documentation
 

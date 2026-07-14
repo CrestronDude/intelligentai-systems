@@ -33,6 +33,8 @@ src/
     contact/layout.tsx      # metadata for /contact
     invisible-audio/page.tsx# JBL CONCEAL (C62/C83/C86/C82W) + DA850/DA1650 amps + rooms walkthrough
     outdoor/page.tsx        # Outdoor Living — landscape audio, lighting, gates, pool (walkthrough)
+    marine/page.tsx         # JBL Marine Audio + Starlink/Bell connectivity + product catalog
+    marine/opengraph-image.tsx  # 1200×630 landscape share card (marine-only)
     simulator/page.tsx      # Interactive Smart Home Simulator (touch panel + remote + live env)
     api/contact/route.ts    # LIVE Brevo email + BotID/honeypot/timing/rate-limit/zod protection
     sitemap.ts robots.ts manifest.ts not-found.tsx   # SEO / PWA / 404
@@ -43,6 +45,7 @@ src/
     home/   Hero.tsx RoomJourney.tsx TrustBar.tsx ServicesOverview.tsx
             FeaturedProjects.tsx WhyUs.tsx Testimonials.tsx Assurance.tsx
             AIToolsSection.tsx FAQ.tsx FinalCTA.tsx
+            MarineAudioPromo.tsx MarineConnectivitySection.tsx MarineCatalog.tsx  # marine (reusable)
     shared/ SpaceWalkthrough.tsx  # reusable continuous scroll-scrub "walk through spaces"
             SmoothScroll.tsx      # global Lenis smooth scrolling
             ScrollReveal.tsx      # global [data-reveal] on-scroll reveal engine
@@ -55,9 +58,10 @@ src/
     ui/     TiltCard.tsx CahoniLink.tsx
   lib/
     utils.ts                # cn()
-    data/ projects.ts services.ts jbl.ts certifications.ts
+    data/ projects.ts services.ts jbl.ts certifications.ts jblMarine.ts
 public/
-  images/ jbl/*.png  home-theater.jpg  digital-signage.jpg  corporate-av.jpg   # local imagery
+  images/ jbl/*.png  home-theater.jpg  digital-signage.jpg  corporate-av.jpg
+          jbl-marine-audio.jpg  marine-og-bg.jpg  marine/   # marine (product photos go in marine/)
   media/  video/*.mp4  audio/*.mp3      # self-hosted clips + tracks for the simulator
 ```
 
@@ -90,6 +94,17 @@ A fully client-side interactive demo (`src/components/simulator/*`). One `useRed
 - **Audio** — `useHomeAudio.ts` plays the MP3 via an `Audio()` element routed through a Web Audio `AnalyserNode` (created inside a user gesture), so the equalizer reacts to the real track. Returns a memoized engine (stable identity — don't break that).
 - **Lighting** dims the photo's real fixtures via a CSS `brightness()` filter + warm ambiance glow + color wash; shades closing darkens further.
 - **Mobile**: the fixed `80vh` side-by-side frame and inner panel scrolling are `lg:`-only. On phones the stage is `~44vh` and the panel/remote expand to full natural height (page scrolls).
+
+---
+
+## Marine (`/marine`)
+
+The marine section covers **JBL Marine Audio + Starlink/Bell connectivity**, reusing three components (also used on the homepage): `MarineAudioPromo` (ad poster + CTAs), `MarineConnectivitySection` (Starlink Maritime / Bell marina internet / bundle), and `MarineCatalog` (filterable product grid).
+
+- **Catalog data**: `src/lib/data/jblMarine.ts` — 27 products (amps/subs/speakers+tower) with model, spec, price (MSRP CAD), description, best-for. Transcribed from the client's catalog spreadsheet (kept out of the repo).
+- **Product photos**: each card loads `/images/marine/<MODEL>.jpg` and falls back to a branded placeholder via `<img> onError` until the photo exists. Drop photos into `public/images/marine/` using the model-number filenames to light them up.
+- **Share image**: `marine/opengraph-image.tsx` renders a 1200×630 landscape card over `public/images/marine-og-bg.jpg` (marine-only; the rest of the site keeps the default OG image).
+- Phone `(647) 272-3150`; service area copy is "Greater Toronto Area / Ontario" (Steven's preferred wording — don't swap to "Durham Region").
 
 ---
 
